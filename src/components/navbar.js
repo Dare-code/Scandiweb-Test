@@ -1,26 +1,39 @@
 import React, { Component } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { currencies } from "../query/query";
 import DropdownCart from "./DropdownCart";
+import { client } from "../index";
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showCartDropdown: false
+      showCartDropdown: false,
+      currencies: [],
     }
   }
 
+  componentDidMount = async () => {
+    const data = await client.query({
+      query: currencies,
+    });
+    this.setState({
+      currencies: data.data.currencies,
+    });
+  };
+
+
   render() {
-    console.log(this.props, "navbas");
     return (
       <div className="header">
-        <div className="categories-temp">
+        <div className="categories">
           <ul>
             {this.props.categories.map((el) => {
               return (
                 <li
                   key={el.name}
-                  className="categoriesName"
+                  className="categories-menu"
                   onClick={() => {
                     this.props.filterProducts(el.name);
                   }}
@@ -31,17 +44,16 @@ class Navbar extends Component {
             })}
           </ul>
         </div>
-        <div className="navbar-temp">
-          <div className="logo-temp">
-            <img src="/logo.svg" alt="img" />
-          </div>
-          <div className="actions">
-            <select>
-              {this.props.categories.map((el, i) => {
-                return <option key={i}>{el.symbol}</option>;
-              })}
-            </select>
-            <div>
+        <div className="logo-temp">
+          <img src="/logo.svg" alt="img" />
+        </div>
+        <div className="actions">
+          <select>
+            {this.state.currencies.map((el, i) => {
+              return <option key={i}>{el.symbol}</option>;
+            })}
+          </select>
+          <div>
             <div className="shoppingItem" onClick={() => {
               this.setState({
                 showCartDropdown: !this.state.showCartDropdown
@@ -53,9 +65,9 @@ class Navbar extends Component {
               <img src="/img.png" alt="shop" />
             </div>
             {this.state.showCartDropdown ? <DropdownCart {...this.props} /> : null}
-            </div>
           </div>
         </div>
+
       </div>
     );
   }

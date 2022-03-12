@@ -1,21 +1,47 @@
 import React, { Component } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { product } from "../query/query";
 class DropdownCart extends Component {
+    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
     }
 
     render() {
-        console.log(this.props, "Dropdown");
         return (
-            <div className="header-temp">
-                <ul>
-                    {this.props.cart.map(product => (
-                        <li>{product.name} -  {product.count}</li>
-                    ))}
-                </ul>
-                <Link to='/cart'>View</Link>
+            <div className="headerTemp">
+                <div>My bag : {product.count} item</div>
+                <div className="mainHeader">
+                    <div>
+                        <ul>
+                            {this.props.cart.map((product) => (
+                                <div>
+                                    <p>{product.name}</p>
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            {this.props.cart.map((product) => (
+                                <div>
+                                    <p>{product.count}</p>
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            {this.props.cart.map((product) => (
+                                <div>
+                                    <img className="headerImg" src={product.gallery[0]} alt='img' />
+                                </div>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <Link to='/cart'>View All Bags</Link>
             </div>
         );
     }

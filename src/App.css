@@ -1,146 +1,280 @@
+.App {
+  width: 85%;
+  margin: 0 auto;
+}
+
 .title {
   height: 68px;
-  margin-left: 101px;
   margin-top: 160px;
+  margin-bottom: 87px;
   font-family: Raleway;
   font-style: normal;
   font-weight: normal;
   font-size: 42px;
   line-height: 160%;
-  display: flex;
-  align-items: center;
   color: #1d1f22;
 }
+
 .header {
-  position: absolute;
-  width: 100%;
-  height: 80px;
-  left: 0px;
-  top: 0px;
-}
-.navbar {
-  position: absolute;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background: #ffffff;
-}
-.categories {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  position: absolute;
-  padding: 0px;
-  height: 56px;
-  width: 234px;
-  left: 101px;
-  top: 24px;
-  border-radius: 0px;
+  justify-content: space-between;
+  padding: 30px 0;
 }
+
+.categories ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+}
+
+.categories ul li {
+  margin-right: 32px;
+}
+
+.categories-menu {
+  text-transform: uppercase;
+}
+
+.categories-menu a {
+  text-decoration: none;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #1d1f22;
+}
+
+.logo-temp img {
+  width: 31.18px;
+  height: 28.62px;
+  background: linear-gradient(316.98deg, #52d67a 16.88%, #5aee87 84.04%);
+  color: white;
+}
+
 .actions {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   padding: 0px;
-  position: absolute;
   width: 204px;
   height: 40px;
-  right: 101px;
-  top: 24px;
 }
+
 .actions select {
   border: none;
   outline: none;
 }
+
 .actions select {
   font-size: 20px;
   width: 36px;
 }
-.categories ul {
-  display: flex;
-  align-items: center;
-}
-.categories ul li {
-  cursor: pointer;
-}
-.categoriesName {
-  position: static;
-  height: 20px;
-  left: 0%;
-  right: 0%;
-  top: calc(50% - 20px / 2 - 16px);
-  font-family: Raleway;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 120%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  text-transform: uppercase;
-  color: #1d1f22;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin-right: 32px;
-}
-.logo {
-  position: absolute;
-  left: 0%;
-  right: -0.07%;
-  top: 24px;
-  bottom: 0.83%;
-  text-align: center;
-}
-.logo img {
-  width: 31.18px;
-  height: 28.62px;
-  background: linear-gradient(316.98deg, #52d67a 16.88%, #5aee87 84.04%);
-  color: white;
-}
+
 .shoppingItem {
   margin-left: 24px;
 }
 .shoppingItem img {
-  left: 0%;
-  right: 0%;
-  top: 5.84%;
-  bottom: 29.11%;
   width: 20px;
   background: #43464e;
+  position: relative;
+}
+.headerTemp {
+  position: absolute;
+  width: 325px;
+  height: 540px;
+  right: 87px;
+  top: 78px;
+  z-index: 99999;
+  background-color: beige;
+}
+.default {
+  position: relative;
+  width: 356px;
+}
+.main {
+  position: relative;
+}
+.opacity {
+  position: relative;
+  width: 356px;
+  background: #ffffff;
+  opacity: 0.5;
+}
+.opacity span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 160%;
+  color: #8d8f9a;
 }
 .productList {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-bottom: 108px;
-  margin-left: 100px;
-  margin-right: 100px;
 }
-.product {
-  flex: 0 0 31.333333%;
-  height: 444px;
-  left: calc(50% - 386px / 2 - 427px);
+.productList .product {
+  flex: 0 0 33.333333%;
+  text-decoration: none;
+  margin-bottom: 103px;
 }
-.productPicture {
-  width: 100%;
+.picture {
   height: 338px;
+  width: 100%;
+}
+.product .productDescription {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 160%;
+  color: #1d1f22;
+}
+.productPrice {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  color: #1d1f22;
 }
 .productDetail {
   display: flex;
-  justify-content: space-around;
-  margin-left: 96px;
-  margin-right: 219px;
+  margin-top: 72px;
 }
 .productDetail .productDetailPicture {
   width: 10%;
 }
 .imageDetail {
-  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 .addToCart {
-  width: 50%;
-  text-align: center;
+  text-align: left;
+}
+.button {
+  width: 292px;
+  height: 52px;
+  left: 929px;
+  top: 478px;
+  background-color: #5ece7b;
+  color: #ffffff;
+  border: none;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+.addToCart div {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+}
+.price {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  color: #1d1f22;
+}
+.amount {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+  color: #1d1f22;
+}
+.cartName {
+  font-family: "Roboto Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  color: #1d1f22;
+}
+.cartBrand {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1d1f22;
+}
+
+.cartDescription {
+  font-family: "Roboto" !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  line-height: 159.96% !important;
+  color: #1d1f22 !important;
+}
+.mainDiv .imageDetail .productDetailPicture {
+  margin-bottom: 20px;
+  width: 20% !important;
+}
+.singlePicture img {
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.mainDiv {
+  display: flex;
+}
+
+.sizeBox {
+  display: flex;
+}
+.sizeBoxInner {
+  width: 63px;
+  height: 45px;
+  border: 1px solid #a6a6a6;
+  box-sizing: border-box;
+  margin-right: 12px;
+  position: relative;
+}
+.sizeBoxInner .size {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #a6a6a6;
+}
+
+.active {
+  width: 63px;
+  height: 45px;
+  position: relative;
+  background: #1d1f22;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  margin-right: 12px;
+}
+
+.active .sizeActive {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+}
+.mainHeader {
+  display: flex;
+}
+.headerImg {
+  width: 100%;
 }

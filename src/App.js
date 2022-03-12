@@ -8,7 +8,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from "react-router-dom";
 import ProductDetail from "./components/productDetail";
 import Cart from "./components/Cart";
@@ -24,7 +23,7 @@ class App extends Component {
     this.addToCart = this.addToCartHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
   }
-
+ 
   addToCartHandler(product) {
     this.setState({
       ...this.state,
@@ -68,21 +67,20 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state, "state")
     return (
       <div className="App">
         <Router>
           <Navbar filterProducts={this.filterProducts} {...this.state} />
-          <p className="title">Category Name</p>
           <Switch>
             <Route exact path="/">
+              <p className="title">Category Name</p>
               <Products data={this.state.filtered} />
             </Route>
             <Route path="/cart">
               <Cart {...this.state} />
             </Route>
             <Route path="/:id" component={(match) => {
-              return <ProductDetail addToCart={this.addToCart} {...match} />
+              return <ProductDetail addToCart={this.addToCart} {...match} {...this.state} />
             }} />
           </Switch>
         </Router>

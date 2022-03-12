@@ -5,10 +5,18 @@ export const product = gql`
     product(id: $id) {
       id
       name
-      inStock
+      brand
       gallery
       description
-      brand
+      inStock
+      category
+      prices {
+        currency{
+          label
+          symbol
+        }
+        amount
+      }
     }
   }
 `;

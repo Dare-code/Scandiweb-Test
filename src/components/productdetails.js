@@ -1,6 +1,6 @@
 import React from "react";
 import { client } from "../index";
-import { product } from "../queries/query";
+import { product } from "../queries/product";
 
 class ProductDetail extends React.Component {
     constructor(props) {
@@ -23,7 +23,7 @@ class ProductDetail extends React.Component {
         }
         const { gallery, name, description, brand, prices } =
             this.state.data.product;
-
+        console.log(prices[0].currency.symbol)
         return (
             <div className="mainDiv">
                 <div className="imageDetail">
@@ -55,7 +55,7 @@ class ProductDetail extends React.Component {
                         <div>
                             <p className="price">Price :</p>
                             <p className="amount">
-                                {prices[0].currency.symbol} {prices[0].amount}
+                                {this.props.currency} {prices[0].amount}
                             </p>
                         </div>
                         <button

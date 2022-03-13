@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import Navbar from "./components/navbar";
 import Products from "./components/products";
-import { categories } from "./queries/query";
+import { categories } from "./queries/categories";
 import { client } from "./index";
 import {
   BrowserRouter as Router,
@@ -19,15 +19,14 @@ class App extends Component {
       categories: [],
       filtered: [],
       cart: [],
-      currency: '',
+      currency: {},
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
-    this.selectedCurrency = this.handleCurrencyChange.bind(this)
+    this.setCurrency = this.setCurrencyHandler.bind(this);
   }
 
-  handleCurrencyChange = e => {
-    console.log(e.target.value)
+  setCurrencyHandler = e => {
     this.setState({
       ...this.state,
       currency: e.target.value
@@ -77,10 +76,11 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.currency)
     return (
       <div className="App">
         <Router>
-          <Navbar filterProducts={this.filterProducts} selectedOption={this.selectedCurrency} {...this.state} />
+          <Navbar filterProducts={this.filterProducts} setCurrency={this.setCurrency} {...this.state} />
           <Switch>
             <Route exact path="/">
               <Products data={this.state.filtered} {...this.state} />

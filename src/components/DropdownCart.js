@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { product } from "../queries/query";
+import { product } from "../queries/product";
+
 class DropdownCart extends Component {
     // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
     }
-
     render() {
         return (
             <div className="headerTemp">
-                <div>My bag : {product.count} item</div>
+                <div>My bag : {product.quantity} item</div>
                 <div className="mainHeader">
                     {this.props.cart.map((product) => (
                         <>
@@ -18,7 +18,7 @@ class DropdownCart extends Component {
                                 <p>{product.name}</p>
                             </div>
                             <div>
-                                <p>{product.count}</p>
+                                <p>{product.quantity}</p>
                             </div>
                             <div>
                                 <div>

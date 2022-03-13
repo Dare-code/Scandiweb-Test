@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import DropdownCart from "./dropdowncart";
 import { client } from "../index";
-import { currencies } from "../queries/query";
+import { currencies } from "../queries/currencies";
 
 class Navbar extends Component {
   constructor(props) {
@@ -25,8 +24,8 @@ class Navbar extends Component {
 
 
   render() {
-    const { currency } = this.props.currency;
-    console.log(currency)
+    const { currency, setCurrency } = this.props;
+
     return (
       <div className="header">
         <div className="categories">
@@ -52,10 +51,10 @@ class Navbar extends Component {
         <div className="actions">
           <select
             value={currency}
-            onChange={(e) => this.props.handleCurrencyChange(e)}
+            onChange={setCurrency}
           >
-            {this.state.currencies.map((currency, i) => {
-              return <option value={currency.symbol} key={i}>{currency.symbol}</option>;
+            {this.state.currencies.map((currency) => {
+              return <option value={currency.symbol} key={currency.label}>{currency.symbol}</option>;
             })}
           </select>
           <div>

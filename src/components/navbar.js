@@ -11,7 +11,6 @@ class Navbar extends Component {
     this.state = {
       showCartDropdown: false,
       currencies: [],
-      selectedOption: [],
     }
   }
 
@@ -24,15 +23,10 @@ class Navbar extends Component {
     });
   };
 
-  handleChange = e => {
-    this.setState({
-      selectedOption: e.target.value
-    });
-  };
 
   render() {
-    const { selectedOption } = this.state;
-    console.log(this.props, selectedOption)
+    const { currency } = this.props.currency;
+    console.log(currency)
     return (
       <div className="header">
         <div className="categories">
@@ -57,8 +51,8 @@ class Navbar extends Component {
         </div>
         <div className="actions">
           <select
-            value={selectedOption}
-            onChange={this.handleChange}
+            value={currency}
+            onChange={(e) => this.props.handleCurrencyChange(e)}
           >
             {this.state.currencies.map((currency, i) => {
               return <option value={currency.symbol} key={i}>{currency.symbol}</option>;

@@ -15,29 +15,19 @@ class DropdownCart extends Component {
                     {this.props.cart.map((product) => (
                         <>
                             <div>
-                                <ul>
-                                    <div>
-                                        <p>{product.name}</p>
-                                    </div>
-                                </ul>
+                                <p>{product.name}</p>
                             </div>
                             <div>
-                                <ul>
-                                    <div>
-                                        <p>{product.count}</p>
-                                    </div>
-                                </ul>
+                                <p>{product.count}</p>
                             </div>
                             <div>
-                                <ul>
-                                    <div>
-                                        <img
-                                            className="headerImg"
-                                            src={product.gallery[0]}
-                                            alt="img"
-                                        />
-                                    </div>
-                                </ul>
+                                <div>
+                                    <img
+                                        className="headerImg"
+                                        src={product.gallery[0]}
+                                        alt="img"
+                                    />
+                                </div>
                             </div>
                         </>
                     ))}

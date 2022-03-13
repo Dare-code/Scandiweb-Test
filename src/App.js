@@ -19,17 +19,18 @@ class App extends Component {
       categories: [],
       filtered: [],
       cart: [],
-      selectedOption: [],
+      currency: '',
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
-    this.selectedCurrency = this.handleChange.bind(this)
+    this.selectedCurrency = this.handleCurrencyChange.bind(this)
   }
-  
-  handleChange = e => {
+
+  handleCurrencyChange = e => {
     console.log(e.target.value)
     this.setState({
-      selectedOption: e.target.value
+      ...this.state,
+      currency: e.target.value
     });
   };
 
@@ -82,7 +83,7 @@ class App extends Component {
           <Navbar filterProducts={this.filterProducts} selectedOption={this.selectedCurrency} {...this.state} />
           <Switch>
             <Route exact path="/">
-              <Products data={this.state.filtered} {...this.state} filterProducts={this.filterProducts} />
+              <Products data={this.state.filtered} {...this.state} />
             </Route>
             <Route path="/cart">
               <Cart {...this.state} />

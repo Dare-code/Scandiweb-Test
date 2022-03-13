@@ -4,22 +4,30 @@ import Product from "./product";
 import { Link } from "react-router-dom";
 
 class Products extends Component {
-    // eslint-disable-next-line no-useless-constructor
-    constructor(props) {
-        super(props);
-    }
-
     render() {
+        const { data } = this.props;
+
         return (
-            <div className="productList">
-                {this.props.data.map(product => {
-                    return (
-                        <Link className="product" to={`/${product.id}`} key={product.id}>
-                            <Product product={product} />
-                        </Link>
-                    );
-                })}
-            </div>
+            <>
+                <div className="productList">
+                    {data.map((product) => {
+                        return (
+                            <div key={product.id}>
+                                <div className="title">
+                                    {product.category}
+                                </div>
+                                <Link
+                                    className="product"
+                                    to={`/${product.id}`}
+
+                                >
+                                    <Product product={product} />
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </div>
+            </>
         );
     }
 }

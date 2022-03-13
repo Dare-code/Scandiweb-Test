@@ -2,15 +2,15 @@ import "./App.css";
 import React, { Component } from "react";
 import Navbar from "./components/navbar";
 import Products from "./components/products";
-import { categories } from "./query/query";
+import { categories } from "./queries/query";
 import { client } from "./index";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
-import ProductDetail from "./components/productDetail";
-import Cart from "./components/Cart";
+import ProductDetail from "./components/productdetails";
+import Cart from "./components/cart";
 
 class App extends Component {
   constructor(props) {
@@ -19,17 +19,26 @@ class App extends Component {
       categories: [],
       filtered: [],
       cart: [],
+      selectedOption: [],
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
+    this.selectedCurrency = this.handleChange.bind(this)
   }
- 
+  
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({
+      selectedOption: e.target.value
+    });
+  };
+
   addToCartHandler(product) {
     this.setState({
       ...this.state,
       cart: [...this.state.cart, {
         ...product,
-        count: 1
+        quantity: 1
       }]
     });
   }
@@ -70,11 +79,10 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Navbar filterProducts={this.filterProducts} {...this.state} />
+          <Navbar filterProducts={this.filterProducts} selectedOption={this.selectedCurrency} {...this.state} />
           <Switch>
             <Route exact path="/">
-              <p className="title">Category Name</p>
-              <Products data={this.state.filtered} />
+              <Products data={this.state.filtered} {...this.state} filterProducts={this.filterProducts} />
             </Route>
             <Route path="/cart">
               <Cart {...this.state} />

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import "../App.css";
 import { Link } from "react-router-dom";
-import { currencies } from "../query/query";
-import DropdownCart from "./DropdownCart";
+
+import DropdownCart from "./dropdowncart";
 import { client } from "../index";
+import { currencies } from "../queries/query";
 
 class Navbar extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class Navbar extends Component {
     this.state = {
       showCartDropdown: false,
       currencies: [],
+      selectedOption: [],
     }
   }
 
@@ -23,22 +24,29 @@ class Navbar extends Component {
     });
   };
 
+  handleChange = e => {
+    this.setState({
+      selectedOption: e.target.value
+    });
+  };
 
   render() {
+    const { selectedOption } = this.state;
+    console.log(this.props, selectedOption)
     return (
       <div className="header">
         <div className="categories">
           <ul>
-            {this.props.categories.map((el) => {
+            {this.props.categories.map((category) => {
               return (
                 <li
-                  key={el.name}
+                  key={category.name}
                   className="categories-menu"
                   onClick={() => {
-                    this.props.filterProducts(el.name);
+                    this.props.filterProducts(category.name);
                   }}
                 >
-                  <Link to="/">{el.name}</Link>
+                  <Link to="/">{category.name}</Link>
                 </li>
               );
             })}
@@ -48,9 +56,12 @@ class Navbar extends Component {
           <img src="/logo.svg" alt="img" />
         </div>
         <div className="actions">
-          <select>
-            {this.state.currencies.map((el, i) => {
-              return <option key={i}>{el.symbol}</option>;
+          <select
+            value={selectedOption}
+            onChange={this.handleChange}
+          >
+            {this.state.currencies.map((currency, i) => {
+              return <option value={currency.symbol} key={i}>{currency.symbol}</option>;
             })}
           </select>
           <div>

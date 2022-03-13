@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../App.css";
 
 class Cart extends Component {
     // eslint-disable-next-line no-useless-constructor

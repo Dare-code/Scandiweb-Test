@@ -22,10 +22,9 @@ class Navbar extends Component {
     });
   };
 
-
   render() {
     const { currency, setCurrency } = this.props;
-
+    console.log(currency.defaultValue,'curr')
     return (
       <div className="header">
         <div className="categories">
@@ -72,7 +71,7 @@ class Navbar extends Component {
           </div>
         </div>
 
-      </div>
+      </div >
     );
   }
 }

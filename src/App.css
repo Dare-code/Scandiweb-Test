@@ -2,7 +2,6 @@
   width: 85%;
   margin: 0 auto;
 }
-
 .title {
   height: 68px;
   margin-top: 160px;
@@ -14,28 +13,23 @@
   line-height: 160%;
   color: #1d1f22;
 }
-
 .header {
   display: flex;
   justify-content: space-between;
   padding: 30px 0;
 }
-
 .categories ul {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
 }
-
 .categories ul li {
   margin-right: 32px;
 }
-
 .categories-menu {
   text-transform: uppercase;
 }
-
 .categories-menu a {
   text-decoration: none;
   font-family: "Raleway";
@@ -45,14 +39,12 @@
   line-height: 120%;
   color: #1d1f22;
 }
-
 .logo-temp img {
   width: 31.18px;
   height: 28.62px;
   background: linear-gradient(316.98deg, #52d67a 16.88%, #5aee87 84.04%);
   color: white;
 }
-
 .actions {
   display: flex;
   flex-direction: row;
@@ -62,22 +54,18 @@
   width: 204px;
   height: 40px;
 }
-
 .actions select {
   border: none;
   outline: none;
 }
-
 .actions select {
   font-size: 20px;
   width: 36px;
   cursor: pointer;
 }
-
 .shoppingItem {
   margin-left: 24px;
   cursor: pointer;
-  
 }
 .shoppingItem img {
   width: 20px;
@@ -216,7 +204,6 @@
   line-height: 27px;
   color: #1d1f22;
 }
-
 .cartDescription {
   font-family: "Roboto" !important;
   font-style: normal !important;
@@ -234,31 +221,29 @@
   left: 50%;
   transform: translate(-50%);
 }
-
 .mainDiv {
   display: flex;
 }
-
 .sizeBox {
   display: flex;
 }
-.sizeBoxInner {
+.sizeBoxInactive {
   width: 63px;
   height: 45px;
   border: 1px solid #a6a6a6;
   box-sizing: border-box;
   margin-right: 12px;
   position: relative;
+  cursor: pointer;
 }
-.sizeBoxInner .size {
+.sizeBoxInactive .size {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #a6a6a6;
 }
-
-.active {
+.sizeBoxActive {
   width: 63px;
   height: 45px;
   position: relative;
@@ -266,14 +251,14 @@
   border: 1px solid #1d1f22;
   box-sizing: border-box;
   margin-right: 12px;
+  color: white;
 }
-
-.active .sizeActive {
+.sizeBoxActive .active {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ffffff;
+  color: #a6a6a6;
 }
 .mainHeader {
   display: flex;

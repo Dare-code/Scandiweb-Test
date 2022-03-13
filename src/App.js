@@ -19,7 +19,10 @@ class App extends Component {
       categories: [],
       filtered: [],
       cart: [],
-      currency: {},
+      currency: {
+        defaultValue: '$',
+        initialValue: ''
+      },
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
@@ -29,7 +32,10 @@ class App extends Component {
   setCurrencyHandler = e => {
     this.setState({
       ...this.state,
-      currency: e.target.value
+      currency: {
+        ...this.state.currency.defaultValue,
+        initialValue: e.target.value
+      }
     });
   };
 
@@ -76,7 +82,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.currency)
+    console.log(this.state.currency.initialValue)
     return (
       <div className="App">
         <Router>

@@ -17,7 +17,6 @@ class Products extends Component {
                                 <Link
                                     className="product"
                                     to={`/${product.id}`}
-
                                 >
                                     <Product product={product} />
                                 </Link>

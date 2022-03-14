@@ -78,7 +78,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.currency.initialValue);
     return (
       <div className="App">
         <Router>

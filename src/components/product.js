@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Product extends Component {
   render() {
-    const { gallery, name, inStock, } = this.props.product;
+    const { gallery, name, inStock, prices } = this.props.product;
     return (
       <>
         <div className={!inStock ? 'default' : 'opacity'}>
@@ -12,7 +12,8 @@ class Product extends Component {
           </div>
           <p className="productDescription">{name}</p>
           <p className="productPrice">
-            {Math.round(this.props.product.prices[0].amount)}
+            <span>{prices[0].currency.symbol}</span>
+            {Math.round(prices[0].amount)}
           </p>
         </div>
       </>

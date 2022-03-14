@@ -25,8 +25,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { currency, setCurrency } = this.props;
-    console.log(currency, 'curr')
+    const { setCurrency } = this.props;
     return (
       <div className="header">
         <div className="categories">
@@ -65,9 +64,9 @@ class Navbar extends Component {
               })
             }}>
               {this.props.cart.length > 0 ? (
-                <span>{this.props.cart.length}</span>
+                <span className="count">{this.props.cart.length}</span>
               ) : null}
-              <img src={bagShopping} alt="shop" />
+              <div className="bag"><img src={bagShopping} alt="shop" /></div>
             </div>
             {this.state.showCartDropdown ? <DropdownCart {...this.props} /> : null}
           </div>

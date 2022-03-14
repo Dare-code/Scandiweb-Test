@@ -67,6 +67,7 @@
   margin-left: 24px;
   cursor: pointer;
 }
+
 .shoppingItem img {
   width: 20px;
   background: #43464e;
@@ -75,11 +76,21 @@
 .headerTemp {
   position: absolute;
   width: 325px;
-  height: 540px;
-  right: 87px;
+  min-height: 540px;
+  right: 110px;
   top: 78px;
   z-index: 99999;
   background-color: beige;
+  padding: 16px;
+}
+.headerTempTitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1d1f22;
+  margin-left: 16px;
+  margin-top: 8px;
+  margin-bottom: 25px;
 }
 .default {
   position: relative;
@@ -108,7 +119,7 @@
 .productList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .productList .product {
   flex: 0 0 33.333333%;
@@ -255,4 +266,181 @@
 }
 .headerImg {
   width: 100%;
+}
+.showCart {
+  list-style-type: none;
+  padding: 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 19px;
+  margin: 0 auto;
+}
+.showCart li {
+  margin-bottom: 19px;
+  display: flex;
+  justify-content: space-between;
+}
+.header-temp .cartTitle {
+  margin-top: 160px;
+  margin-bottom: 59px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+  color: #1d1f22;
+}
+.showCart .cartName {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1d1f22;
+}
+.showCart .cartBrand {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1d1f22;
+}
+.showCart .cartCurrency {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+  color: #1d1f22;
+}
+
+.showCart .cartQuantity {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.showCart .cartImage {
+  width: 30%;
+}
+.showCart .cartImage img {
+  width: 100%;
+}
+.showCart .cartDetails {
+  width: 100%;
+}
+.showCart .cartQuantity .cartCounter {
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  width: 45px;
+  height: 45px;
+  position: relative;
+}
+
+.showCart .cartQuantity .cartNumber {
+  box-sizing: border-box;
+  width: 45px;
+  height: 45px;
+  position: relative;
+}
+
+.showCart .cartQuantity .cartCounter span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.showCart .cartQuantity .cartNumber span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.shoppingItem .bag {
+  position: relative;
+}
+
+.shoppingItem .count {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: #1d1f22;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  width: 20px;
+  height: 20px;
+  z-index: 99999;
+}
+
+.showCart .cartDropdownName {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+}
+
+.showCart .cartDropdownCurrency {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  width: 52px;
+  height: 26px;
+}
+.showCart .cartDropdownCounter {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.showCart .cartDropdownCounter span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.showCart .cartDropdownNumber {
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.showCart .cartDropdownNumber span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+.footer .viewAllBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  width: 140px;
+  height: 43px;
+  background: #ffffff;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+.footer .checkBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 32px;
+  width: 140px;
+  height: 43px;
+  background: #5ECE7B;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #FFFFFF;
 }

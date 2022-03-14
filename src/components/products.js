@@ -1,4 +1,3 @@
-import "../App.css";
 import React, { Component } from "react";
 import Product from "./product";
 import { Link } from "react-router-dom";
@@ -6,7 +5,6 @@ import { Link } from "react-router-dom";
 class Products extends Component {
     render() {
         const { data } = this.props;
-
         return (
             <>
                 <div className="productList">

@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import { product } from "../queries/product";
 
 class DropdownCart extends Component {
-    // eslint-disable-next-line no-useless-constructor
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div className="headerTemp">

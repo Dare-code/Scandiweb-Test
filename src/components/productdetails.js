@@ -84,7 +84,7 @@ class ProductDetail extends React.Component {
                         <div>
                             <p className="price">Price :</p>
                             <p className="amount">
-                                {this.props.currency}
+                                {this.props.currency.value}
                                 {prices[0].amount}
                             </p>
                         </div>

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Product extends Component {
   render() {
     const { gallery, name, inStock, } = this.props.product;
-
     return (
       <>
         <div className={!inStock ? 'default' : 'opacity'}>

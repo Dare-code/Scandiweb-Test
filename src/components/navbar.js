@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import DropdownCart from "./dropdowncart";
 import { client } from "../index";
 import { currencies } from "../queries/currencies";
+import bagShopping from '../assets/images/bagshopping.png';
+import logo from '../assets/images/logo.svg';
 
 class Navbar extends Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class Navbar extends Component {
 
   render() {
     const { currency, setCurrency } = this.props;
-    console.log(currency.defaultValue,'curr')
+    console.log(currency, 'curr')
     return (
       <div className="header">
         <div className="categories">
@@ -45,11 +47,11 @@ class Navbar extends Component {
           </ul>
         </div>
         <div className="logo-temp">
-          <img src="/logo.svg" alt="img" />
+          <img src={logo} alt="img" />
         </div>
         <div className="actions">
           <select
-            value={currency}
+            defaultValue={this.props.value}
             onChange={setCurrency}
           >
             {this.state.currencies.map((currency) => {
@@ -65,7 +67,7 @@ class Navbar extends Component {
               {this.props.cart.length > 0 ? (
                 <span>{this.props.cart.length}</span>
               ) : null}
-              <img src="/img.png" alt="shop" />
+              <img src={bagShopping} alt="shop" />
             </div>
             {this.state.showCartDropdown ? <DropdownCart {...this.props} /> : null}
           </div>

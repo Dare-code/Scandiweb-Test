@@ -4,11 +4,7 @@ import Navbar from "./components/navbar";
 import Products from "./components/products";
 import { categories } from "./queries/categories";
 import { client } from "./index";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./components/productdetails";
 import Cart from "./components/cart";
 
@@ -20,8 +16,7 @@ class App extends Component {
       filtered: [],
       cart: [],
       currency: {
-        defaultValue: '$',
-        initialValue: ''
+        value: "$",
       },
     };
     this.addToCart = this.addToCartHandler.bind(this);
@@ -29,23 +24,24 @@ class App extends Component {
     this.setCurrency = this.setCurrencyHandler.bind(this);
   }
 
-  setCurrencyHandler = e => {
+  setCurrencyHandler = (e) => {
     this.setState({
-      ...this.state,
       currency: {
-        ...this.state.currency.defaultValue,
-        initialValue: e.target.value
-      }
+        value: e.target.value,
+      },
     });
   };
 
   addToCartHandler(product) {
     this.setState({
       ...this.state,
-      cart: [...this.state.cart, {
-        ...product,
-        quantity: 1
-      }]
+      cart: [
+        ...this.state.cart,
+        {
+          ...product,
+          quantity: 1,
+        },
+      ],
     });
   }
 
@@ -82,11 +78,15 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.currency.initialValue)
+    console.log(this.state.currency.initialValue);
     return (
       <div className="App">
         <Router>
-          <Navbar filterProducts={this.filterProducts} setCurrency={this.setCurrency} {...this.state} />
+          <Navbar
+            filterProducts={this.filterProducts}
+            setCurrency={this.setCurrency}
+            {...this.state}
+          />
           <Switch>
             <Route exact path="/">
               <Products data={this.state.filtered} {...this.state} />
@@ -94,9 +94,18 @@ class App extends Component {
             <Route path="/cart">
               <Cart {...this.state} />
             </Route>
-            <Route path="/:id" component={(match) => {
-              return <ProductDetail addToCart={this.addToCart} {...match} {...this.state} />
-            }} />
+            <Route
+              path="/:id"
+              component={(match) => {
+                return (
+                  <ProductDetail
+                    addToCart={this.addToCart}
+                    {...match}
+                    {...this.state}
+                  />
+                );
+              }}
+            />
           </Switch>
         </Router>
       </div>

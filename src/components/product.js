@@ -8,7 +8,7 @@ class Product extends Component {
         <div className={!inStock ? 'default' : 'opacity'}>
           <div className="main">
             <img className="picture" src={gallery[0]} alt={name} />
-            {inStock ? <span>Out of stock</span> : null}
+            {inStock ? <span className="productStock">Out of stock</span> : null}
           </div>
           <p className="productDescription">{name}</p>
           <p className="productPrice">

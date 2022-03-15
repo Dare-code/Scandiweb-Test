@@ -7,20 +7,19 @@ class Products extends Component {
         const { data } = this.props;
         return (
             <>
+                <div className="title">
+                    {this.props.categoryName} Category
+                </div>
                 <div className="productList">
                     {data.map((product) => {
                         return (
-                            <div key={product.id}>
-                                <div className="title">
-                                    {product.category}
-                                </div>
                                 <Link
+                                    key={product.id}
                                     className="product"
                                     to={`/${product.id}`}
                                 >
                                     <Product product={product} />
                                 </Link>
-                            </div>
                         );
                     })}
                 </div>

@@ -18,6 +18,7 @@ class App extends Component {
       currency: {
         value: "$",
       },
+      categoryName: 'All'
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
@@ -74,6 +75,7 @@ class App extends Component {
     this.setState({
       ...this.state,
       filtered: filtered,
+      categoryName: name
     });
   };
 
@@ -88,7 +90,7 @@ class App extends Component {
           />
           <Switch>
             <Route exact path="/">
-              <Products data={this.state.filtered} {...this.state} />
+              <Products data={this.state.filtered} {...this.state} categoryName={this.state.categoryName} />
             </Route>
             <Route path="/cart">
               <Cart {...this.state} />

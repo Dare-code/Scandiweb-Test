@@ -5,7 +5,7 @@ class ProductDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeSizeBox: [],
+            activeSizeBox: 1,
             values: [
                 { id: 1, text: "XS" },
                 { id: 2, text: "S" },
@@ -35,7 +35,7 @@ class ProductDetail extends React.Component {
         const { gallery, name, description, brand, prices } =
             this.state.data.product;
         return (
-            <div className="mainDiv">
+            <div className="productDetailsPage">
                 <div className="imageDetail">
                     {gallery.map((image) => (
                         <img

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import DropdownCart from "./dropdowncart";
 import { client } from "../index";
 import { currencies } from "../queries/currencies";
-import bagShopping from '../assets/images/bagshopping.png';
-import logo from '../assets/images/logo.svg';
+import bagShopping from "../assets/images/bagshopping.png";
+import logo from "../assets/images/logo.svg";
 
 class Navbar extends Component {
   constructor(props) {
@@ -12,7 +12,23 @@ class Navbar extends Component {
     this.state = {
       showCartDropdown: false,
       currencies: [],
-    }
+      activeNavbarCategory: "all",
+    };
+    this.addActiveClass = this.addActiveClass.bind(this);
+    this.dropDownMenu = this.dropDown.bind(this);
+  }
+
+  addActiveClass() {
+    const currentState = this.state.activeNavbarCategory;
+    this.setState({
+      activeNavbarCategory: !currentState,
+    });
+  }
+
+  dropDown() {
+    this.setState({
+      showCartDropdown: !this.state.showCartDropdown,
+    });
   }
 
   componentDidMount = async () => {
@@ -34,12 +50,23 @@ class Navbar extends Component {
               return (
                 <li
                   key={category.name}
-                  className="categories-menu"
                   onClick={() => {
                     this.props.filterProducts(category.name);
                   }}
                 >
-                  <Link to="/">{category.name}</Link>
+                  <Link
+                    className={
+                      this.state.activeNavbarCategory === category.name
+                        ? "activeNavbarCategories"
+                        : "defaultNavbarCategories"
+                    }
+                    onClick={() =>
+                      this.setState({ activeNavbarCategory: category.name })
+                    }
+                    to="/"
+                  >
+                    {category.name}
+                  </Link>
                 </li>
               );
             })}
@@ -49,30 +76,36 @@ class Navbar extends Component {
           <img src={logo} alt="img" />
         </div>
         <div className="actions">
-          <select
-            defaultValue={this.props.value}
-            onChange={setCurrency}
-          >
+          <select defaultValue={this.props.value} onChange={setCurrency}>
             {this.state.currencies.map((currency) => {
-              return <option value={currency.symbol} key={currency.label}>{currency.symbol}</option>;
+              return (
+                <option value={currency.symbol} key={currency.label}>
+                  {currency.symbol}
+                </option>
+              );
             })}
           </select>
           <div>
-            <div className="shoppingItem" onClick={() => {
-              this.setState({
-                showCartDropdown: !this.state.showCartDropdown
-              })
-            }}>
+            <div
+              className="shoppingItem"
+              onClick={() => this.dropDown()}
+            >
               {this.props.cart.length > 0 ? (
                 <span className="count">{this.props.cart.length}</span>
               ) : null}
-              <div className="bag"><img src={bagShopping} alt="shop" /></div>
+              <div className="bag">
+                <img src={bagShopping} alt="shop" />
+              </div>
             </div>
-            {this.state.showCartDropdown ? <DropdownCart {...this.props} /> : null}
+            {this.state.showCartDropdown ? (
+              <DropdownCart
+                {...this.props}
+                dropDownMenu={this.dropDownMenu}
+              />
+            ) : null}
           </div>
         </div>
-
-      </div >
+      </div>
     );
   }
 }

@@ -11,7 +11,6 @@ class Cart extends Component {
         };
     }
     render() {
-        console.log(this.props, "Dropdown");
         return (
             <div className="header-temp">
                 <h2 className="cartTitle">Cart</h2>

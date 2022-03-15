@@ -13,12 +13,13 @@ class DropdownCart extends Component {
         };
     }
     render() {
+        const { dropDownMenu } = this.props;
         return (
             <div className="headerTemp">
                 <span className="headerTempTitle">
                     My bag : {product.quantity} item
                 </span>
-                <ul className="showCart">
+                <ul className="showDropdownCart">
                     {this.props.cart.map((product) => (
                         <li key={product.name}>
                             <div className="cartDetails">
@@ -27,15 +28,14 @@ class DropdownCart extends Component {
                                     {product.prices[0].currency.symbol}
                                     {product.prices[0].amount}
                                 </p>
-                                <div className="sizeBox">
+                                <div className="sizeDropdownBox">
                                     {this.state.values.map((val) => (
-                                        <div key={val.id} className="sizeBoxInactive">
+                                        <div key={val.id} className="dropdownInactive">
                                             <span className="size">{val.text}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                            {console.log(product.quantity)}
                             <div className="cartQuantity">
                                 <div>
                                     <div className="cartDropdownCounter">
@@ -57,8 +57,12 @@ class DropdownCart extends Component {
                 </ul>
 
                 <div className="footer">
-                    <Link className="viewAllBtn" to="/cart">View Bag</Link>
-                    <Link  className="checkBtn" to="/cart">Check Out</Link>
+                    <Link onClick={dropDownMenu} className="viewAllBtn" to="/cart">
+                        View Bag
+                    </Link>
+                    <Link className="checkBtn" to="/cart">
+                        Check Out
+                    </Link>
                 </div>
             </div>
         );

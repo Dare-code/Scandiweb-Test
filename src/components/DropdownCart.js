@@ -1,39 +1,34 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { product } from "../queries/product";
 
 class DropdownCart extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            values: [
-                { id: 1, text: "XS" },
-                { id: 2, text: "S" },
-            ],
-        };
-    }
     render() {
-        const { dropDownMenu } = this.props;
+        const { dropDownMenu, cart } = this.props;
         return (
             <div className="headerTemp">
                 <span className="headerTempTitle">
-                    My bag : {product.quantity} item
+                    My bag : {cart[0].quantity} item
                 </span>
                 <ul className="showDropdownCart">
-                    {this.props.cart.map((product) => (
+                    {cart.map((product) => (
                         <li key={product.name}>
                             <div className="cartDetails">
                                 <h2 className="cartDropdownName">{product.name}</h2>
+                                <h2 className="cartDropdownName">{product.brand}</h2>
                                 <p className="cartDropdownCurrency">
                                     {product.prices[0].currency.symbol}
                                     {product.prices[0].amount}
                                 </p>
                                 <div className="sizeDropdownBox">
-                                    {this.state.values.map((val) => (
-                                        <div key={val.id} className="dropdownInactive">
-                                            <span className="size">{val.text}</span>
-                                        </div>
-                                    ))}
+                                    {product.attributes.map((val) => {
+                                        return val.items.map((el) => {
+                                            return (
+                                                <div key={el.id} className="dropdownInactive">
+                                                    <span className="size">{el.value}</span>
+                                                </div>
+                                            );
+                                        });
+                                    })}
                                 </div>
                             </div>
                             <div className="cartQuantity">
@@ -44,7 +39,7 @@ class DropdownCart extends Component {
                                     <div className="cartDropdownNumber">
                                         <span>{product.quantity}</span>
                                     </div>
-                                    <div className="cartDropdownCounter">
+                                    <div className="cartDropdownCounterBottom">
                                         <span>-</span>
                                     </div>
                                 </div>

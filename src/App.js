@@ -90,7 +90,7 @@ class App extends Component {
           />
           <Switch>
             <Route exact path="/">
-              <Products data={this.state.filtered} {...this.state} categoryName={this.state.categoryName} />
+              <Products data={this.state.filtered} {...this.state} />
             </Route>
             <Route path="/cart">
               <Cart {...this.state} />

@@ -5,16 +5,11 @@ class ProductDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            activeSizeBox: 1,
-            values: [
-                { id: 1, text: "XS" },
-                { id: 2, text: "S" },
-                { id: 3, text: "M" },
-                { id: 4, text: "L" },
-            ],
+            activeSizeBox: [],
             activePhoto: [],
         };
     }
+
     componentDidMount = async () => {
         const data = await client.query({
             query: product,
@@ -26,14 +21,17 @@ class ProductDetail extends React.Component {
         this.setState({
             ...this.state,
             activePhoto: this.state.data.product.gallery[0],
-        })
+            activeSizeBox: this.state.data.product.attributes[0].items[0].id,
+        });
     };
+
     render() {
         if (!this.state.data) {
             return <>Loading...</>;
         }
-        const { gallery, name, description, brand, prices } =
+        const { gallery, name, description, brand, prices, attributes } =
             this.state.data.product;
+        console.log(attributes)
         return (
             <div className="productDetailsPage">
                 <div className="imageDetail">
@@ -43,24 +41,26 @@ class ProductDetail extends React.Component {
                             className="productDetailPicture"
                             src={image}
                             alt="img"
-                            onClick={() => this.setState({
-                                ...this.state,
-                                activePhoto: image
-                            })}
+                            onClick={() =>
+                                this.setState({
+                                    ...this.state,
+                                    activePhoto: image,
+                                })
+                            }
                         />
                     ))}
                 </div>
                 <div className="productDetail">
                     <div className="singlePicture">
-                        <img src={this.state.activePhoto} alt='detailsPicture' />
+                        <img src={this.state.activePhoto} alt="detailsPicture" />
                     </div>
                     <div className="addToCart">
                         <h2 className="cartName">{name}</h2>
                         <h2 className="cartBrand">{brand}</h2>
                         <div>
-                            <p className="price">Size :</p>
+                            <p className="price">{attributes[0].name}</p>
                             <div className="sizeBox">
-                                {this.state.values.map((val) => (
+                                {attributes[0].items.map((val) => (
                                     <div
                                         key={val.id}
                                         className={
@@ -75,7 +75,7 @@ class ProductDetail extends React.Component {
                                                 this.state.activeSizeBox === val.id ? "active" : "size"
                                             }
                                         >
-                                            {val.text}
+                                            {val.displayValue}
                                         </span>
                                     </div>
                                 ))}
@@ -89,7 +89,7 @@ class ProductDetail extends React.Component {
                             </p>
                         </div>
                         <button
-                            className="button"
+                            className={this.props.cart.length === 0 ? "button" : "none"}
                             onClick={() => {
                                 this.props.addToCart(this.state.data.product);
                             }}

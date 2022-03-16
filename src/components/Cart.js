@@ -32,14 +32,14 @@ class Cart extends Component {
                                     ))}
                                 </div>
                             </div>
+                            <div className="cartQuantityInner">
+                                <div className="cartCounter"><span>+</span></div>
+                                <div className="cartNumber"><span>{product.quantity}</span></div>
+                                <div className="cartCounter"><span>-</span></div>
+                            </div>
                             <div className="cartQuantity">
-                                <div>
-                                    <div className="cartCounter"><span>+</span></div>
-                                    <div className="cartNumber"><span>{product.quantity}</span></div>
-                                    <div className="cartCounter"><span>-</span></div>
-                                </div>
                                 <div className="cartImage">
-                                    <img src={product.gallery[0]} alt='img' />
+                                    <img className="cartImageInner" src={product.gallery[0]} alt='img' />
                                 </div>
                             </div>
                         </li>

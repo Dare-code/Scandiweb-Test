@@ -191,6 +191,10 @@
   font-size: 16px;
   line-height: 120%;
   text-transform: uppercase;
+  cursor: pointer;
+}
+.none {
+  display: none;
 }
 .addToCart div {
   font-style: normal;
@@ -266,6 +270,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: #a6a6a6;
+  line-height: 1;
 }
 .sizeBoxActive {
   width: 63px;
@@ -307,9 +312,28 @@
   margin-bottom: 19px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.showDropdownCart li .cartDetails .cartDropdownName {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  display: flex;
+  align-items: center;
+  color: #1d1f22;
+}
+.showDropdownCart li .cartDetails .cartDropdownCurrency {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1d1f22;
 }
 .showCart li {
-  margin-bottom: 19px;
+  margin: 21px 0;
   display: flex;
   justify-content: space-between;
 }
@@ -323,12 +347,14 @@
   color: #1d1f22;
 }
 .showCart .cartName {
+  margin-top: 0;
   font-weight: 600;
   font-size: 30px;
   line-height: 27px;
   color: #1d1f22;
 }
 .showCart .cartBrand {
+  margin: 0;
   font-weight: 400;
   font-size: 30px;
   line-height: 27px;
@@ -343,30 +369,33 @@
 
 .showCart .cartQuantity {
   display: flex;
-  justify-content: end;
   align-items: center;
 }
 
 .showDropdownCart .cartQuantity {
   display: flex;
+  align-items: center;
 }
 
 .showDropdownCart .cartQuantity .cartImage img {
   height: 137px;
   width: 105px;
   border-radius: 0px;
+  margin-left: 10px;
 }
 
 .showCart .cartImage {
-  width: 30%;
+  margin-left: 12px;
 }
-.showCart .cartImage img {
-  width: 100%;
+.showCart .cartImage .cartImageInner {
+  height: 190px;
+  width: 141px;
+  border-radius: 0px;
 }
 .showCart .cartDetails {
   width: 100%;
 }
-.showCart .cartQuantity .cartCounter {
+.showCart  .cartCounter {
   border: 1px solid #1d1f22;
   box-sizing: border-box;
   width: 45px;
@@ -374,21 +403,22 @@
   position: relative;
 }
 
-.showCart .cartQuantity .cartNumber {
+.showCart .cartNumber {
   box-sizing: border-box;
   width: 45px;
   height: 45px;
   position: relative;
+  margin: 28px 0;
 }
 
-.showCart .cartQuantity .cartCounter span {
+.showCart  .cartCounter span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.showCart .cartQuantity .cartNumber span {
+.showCart  .cartNumber span {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -428,6 +458,16 @@
   margin-right: 12px;
   position: relative;
   cursor: pointer;
+  font-family: "Source Sans Pro";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #1d1f22;
+  margin-right: 8px;
 }
 .dropdownInactive .size {
   position: absolute;
@@ -451,6 +491,21 @@
   box-sizing: border-box;
   position: relative;
   margin-bottom: 33px;
+}
+
+.showDropdownCart .cartQuantity .cartDropdownCounterBottom {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #1d1f22;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.showDropdownCart .cartQuantity .cartDropdownCounterBottom span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .showDropdownCart .cartQuantity .cartDropdownCounter span {

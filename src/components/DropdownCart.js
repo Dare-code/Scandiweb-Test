@@ -20,11 +20,11 @@ class DropdownCart extends Component {
                                     {product.prices[0].amount}
                                 </p>
                                 <div className="sizeDropdownBox">
-                                    {product.attributes.map((val) => {
-                                        return val.items.map((el) => {
+                                    {product.attributes.map((atribute) => {
+                                        return atribute.items.map((value) => {
                                             return (
-                                                <div key={el.id} className="dropdownInactive">
-                                                    <span className="size">{el.value}</span>
+                                                <div key={value.id} className="dropdownInactive">
+                                                    <span className="size">{value.value}</span>
                                                 </div>
                                             );
                                         });
@@ -52,12 +52,18 @@ class DropdownCart extends Component {
                 </ul>
 
                 <div className="footer">
-                    <Link onClick={dropDownMenu} className="viewAllBtn" to="/cart">
-                        View Bag
-                    </Link>
-                    <Link className="checkBtn" to="/cart">
-                        Check Out
-                    </Link>
+                    <div className="totalAmount">
+                        <span className="totalAmountTitle">Total</span>
+                        <span className="totalPrice">100%</span>
+                    </div>
+                    <div className="footerMenu">
+                        <Link onClick={dropDownMenu} className="viewAllBtn" to="/cart">
+                            View Bag
+                        </Link>
+                        <Link className="checkBtn" to="/cart">
+                            Check Out
+                        </Link>
+                    </div>
                 </div>
             </div>
         );

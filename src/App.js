@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import Navbar from "./components/navbar";
 import Products from "./components/products";
-import { categories } from "./queries/categories";
+import { getCategories } from "./queries/categories";
 import { client } from "./index";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./components/productdetails";
@@ -48,7 +48,7 @@ class App extends Component {
 
   componentDidMount = async () => {
     const allCategory = await client.query({
-      query: categories,
+      query: getCategories,
     });
     let flatListOfCategories = [];
     allCategory.data.categories.map((category) => {

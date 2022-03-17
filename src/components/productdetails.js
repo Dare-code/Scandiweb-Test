@@ -1,29 +1,35 @@
 import React from "react";
 import { client } from "../index";
-import { product } from "../queries/product";
+import { getProduct } from "../queries/product";
+import Atributes from "./atributes";
 class ProductDetail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             activeSizeBox: [],
             activePhoto: [],
+            atribute: [],
         };
     }
 
     componentDidMount = async () => {
         const data = await client.query({
-            query: product,
+            query: getProduct,
             variables: {
                 id: this.props.match.params.id,
             },
         });
         this.setState(data);
+        let attributes = !this.state.data.product.attributes.length
+            ? null
+            : this.state.data.product.attributes[0].items[0].id;
         this.setState({
             ...this.state,
             activePhoto: this.state.data.product.gallery[0],
-            activeSizeBox: this.state.data.product.attributes[0].items[0].id,
+            activeSizeBox: attributes,
         });
     };
+
 
     render() {
         if (!this.state.data) {
@@ -31,7 +37,7 @@ class ProductDetail extends React.Component {
         }
         const { gallery, name, description, brand, prices, attributes } =
             this.state.data.product;
-        console.log(attributes)
+
         return (
             <div className="productDetailsPage">
                 <div className="imageDetail">
@@ -52,34 +58,21 @@ class ProductDetail extends React.Component {
                 </div>
                 <div className="productDetail">
                     <div className="singlePicture">
-                        <img src={this.state.activePhoto} alt="detailsPicture" />
+                        <img
+                            src={
+                                !this.state.activePhoto ? this.state.activePhoto : gallery[0]
+                            }
+                            alt="detailsPicture"
+                        />
                     </div>
                     <div className="addToCart">
                         <h2 className="cartName">{name}</h2>
                         <h2 className="cartBrand">{brand}</h2>
                         <div>
-                            <p className="price">{attributes[0].name}</p>
-                            <div className="sizeBox">
-                                {attributes[0].items.map((val) => (
-                                    <div
-                                        key={val.id}
-                                        className={
-                                            this.state.activeSizeBox === val.id
-                                                ? "sizeBoxActive"
-                                                : "sizeBoxInactive"
-                                        }
-                                        onClick={() => this.setState({ activeSizeBox: val.id })}
-                                    >
-                                        <span
-                                            className={
-                                                this.state.activeSizeBox === val.id ? "active" : "size"
-                                            }
-                                        >
-                                            {val.displayValue}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
+                            <p className="price">
+                                {!attributes.length ? null : attributes[0].name}
+                            </p>
+                            <Atributes  {...this.state} />
                         </div>
                         <div>
                             <p className="price">Price :</p>
@@ -89,7 +82,7 @@ class ProductDetail extends React.Component {
                             </p>
                         </div>
                         <button
-                            className={this.props.cart.length === 0 ? "button" : "none"}
+                            className="button"
                             onClick={() => {
                                 this.props.addToCart(this.state.data.product);
                             }}

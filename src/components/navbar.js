@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DropdownCart from "./dropdowncart";
 import { client } from "../index";
-import { currencies } from "../queries/currencies";
+import { getCurrencies } from "../queries/currencies";
 import bagShopping from "../assets/images/bagshopping.png";
 import logo from "../assets/images/logo.svg";
 
@@ -33,7 +33,7 @@ class Navbar extends Component {
 
   componentDidMount = async () => {
     const data = await client.query({
-      query: currencies,
+      query: getCurrencies,
     });
     this.setState({
       currencies: data.data.currencies,

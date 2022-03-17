@@ -177,6 +177,7 @@
 }
 .addToCart {
   text-align: left;
+  width: 30%;
 }
 .button {
   width: 292px;
@@ -192,9 +193,6 @@
   line-height: 120%;
   text-transform: uppercase;
   cursor: pointer;
-}
-.none {
-  display: none;
 }
 .addToCart div {
   font-style: normal;
@@ -395,7 +393,7 @@
 .showCart .cartDetails {
   width: 100%;
 }
-.showCart  .cartCounter {
+.showCart .cartCounter {
   border: 1px solid #1d1f22;
   box-sizing: border-box;
   width: 45px;
@@ -411,14 +409,14 @@
   margin: 28px 0;
 }
 
-.showCart  .cartCounter span {
+.showCart .cartCounter span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.showCart  .cartNumber span {
+.showCart .cartNumber span {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -543,12 +541,34 @@
 }
 
 .footer {
-  display: flex;
-  justify-content: space-between;
   position: absolute;
   bottom: 5%;
+  width: 90%;
 }
-.footer .viewAllBtn {
+.footer .totalAmount {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 35px;
+}
+.footer .totalAmount .totalAmountTitle {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #1d1f22;
+}
+.footer .totalAmount .totalPrice {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1D1F22;
+}
+.footer .footerMenu {
+  display: flex;
+  justify-content: space-between;
+}
+.footer .footerMenu .viewAllBtn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -561,7 +581,7 @@
   text-decoration: none;
   margin-right: 12px;
 }
-.footer .checkBtn {
+.footer .footerMenu .checkBtn {
   display: flex;
   justify-content: center;
   align-items: center;

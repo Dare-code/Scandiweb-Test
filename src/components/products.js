@@ -3,22 +3,24 @@ import Product from "./product";
 import { Link } from "react-router-dom";
 
 class Products extends Component {
+    
     render() {
-        const { data } = this.props;
+
+        const { filtered } = this.props;
         return (
             <>
                 <div className="title">
-                    {this.props.categoryName} Category
+                    {this.props.categoryName.toLowerCase() === "all" ? "All categories" : this.props.categoryName}
                 </div>
                 <div className="productList">
-                    {data.map((product) => {
+                    {filtered.map((product) => {
                         return (
                                 <Link
                                     key={product.id}
                                     className="product"
                                     to={`/${product.id}`}
                                 >
-                                    <Product product={product} />
+                                    <Product product={product} {...this.props} />
                                 </Link>
                         );
                     })}

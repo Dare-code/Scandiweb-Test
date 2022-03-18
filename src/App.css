@@ -1,5 +1,6 @@
 .App {
-  width: 85%;
+  width:85%;
+  max-width: 1440px;
   margin: 0 auto;
   font-family: "Raleway", sans-serif;
 }
@@ -54,12 +55,7 @@
   font-size: 16px;
   line-height: 120%;
 }
-.logo-temp img {
-  width: 31.18px;
-  height: 28.62px;
-  background: linear-gradient(316.98deg, #52d67a 16.88%, #5aee87 84.04%);
-  color: white;
-}
+
 .actions {
   display: flex;
   flex-direction: row;
@@ -81,6 +77,7 @@
 .shoppingItem {
   margin-left: 24px;
   cursor: pointer;
+  position:relative;
 }
 
 .shoppingItem img {
@@ -95,7 +92,7 @@
   right: 110px;
   top: 78px;
   z-index: 99999;
-  background-color: beige;
+  background-color: #fff;
   padding: 16px;
 }
 .headerTempTitle {
@@ -132,7 +129,7 @@
 }
 .productList {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 103px 75px;
 }
 
@@ -241,8 +238,18 @@
   height: 80px;
 }
 
+.thumbnail{
+  width:80px;
+  height:80px;
+  background-size:cover;
+  background-position:center;
+  background-repeat: no-repeat;
+  cursor:pointer;
+  margin-bottom:10px;
+}
+
 .singlePicture img {
-  height: 511px;
+  height: auto;
   width: 610px;
   border-radius: 0px;
 }
@@ -427,9 +434,10 @@
   position: relative;
 }
 
-.shoppingItem .count {
+.shoppingItem .cartItemsLabel {
   position: absolute;
-  transform: translate(-50%, -50%);
+  top:-10px;
+  right:-10px;
   background: #1d1f22;
   border-radius: 60px;
   font-weight: 700;
@@ -557,12 +565,12 @@
   color: #1d1f22;
 }
 .footer .totalAmount .totalPrice {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 160%;
-  color: #1D1F22;
+  color: #1d1f22;
 }
 .footer .footerMenu {
   display: flex;
@@ -592,4 +600,65 @@
   box-sizing: border-box;
   text-decoration: none;
   color: #ffffff;
+}
+
+.productPicture {
+  width: auto;
+  height:20vw;
+  max-height: 430px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+}
+.outofstock {
+  opacity: 0.5;
+}
+.outofstock .outofstockMessage {
+  color: #8d8f9a;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+.removeFromCard {
+  background: red;
+}
+.dropdownBackground{
+  position: absolute;
+  z-index:9900;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+  background-color: rgba(0,0,0,.5);
+}
+
+.attributeOption{
+  display: inline-flex;
+  width:50px;
+  height:50px;
+  align-items: center;
+  justify-content: center;
+  margin-right:5px;
+  border:1px solid #000;
+  cursor: pointer;
+}
+.attributeOption.active{
+  background:#000;
+  color:#fff;
+}
+.productWrapper{
+  transition:all ease-in .15s;
+  padding:10px;
+}
+.productWrapper:hover{
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.5);
+}
+
+.productInCart{
+  position:absolute;
+  bottom:-40px;
+  right:20px;
 }

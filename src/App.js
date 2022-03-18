@@ -15,21 +15,19 @@ class App extends Component {
       categories: [],
       filtered: [],
       cart: [],
-      currency: {
-        value: "$",
-      },
+      currency: false,
       categoryName: 'All'
     };
     this.addToCart = this.addToCartHandler.bind(this);
+    this.removeFromCart = this.removeFromCartHandler.bind(this);
+    this.updateProductQuantity = this.updateProductQuantityHandler.bind(this);
     this.filterProducts = this.filterProductsHandler.bind(this);
     this.setCurrency = this.setCurrencyHandler.bind(this);
   }
 
-  setCurrencyHandler = (e) => {
+  setCurrencyHandler(currency) {
     this.setState({
-      currency: {
-        value: e.target.value,
-      },
+      currency: currency,
     });
   };
 
@@ -43,6 +41,31 @@ class App extends Component {
           quantity: 1,
         },
       ],
+    });
+  }
+
+  updateProductQuantityHandler(product, qunatity) {
+      const _cart = [...this.state.cart];
+      _cart.map(cartProduct => {
+        if( cartProduct.id === product.id ){
+          cartProduct.quantity = qunatity;
+        }
+        return true;
+      });
+
+      this.setState({
+        ...this.state,
+        cart: _cart
+      });
+
+  }
+
+  removeFromCartHandler(product) {
+    this.setState({
+      ...this.state,
+      cart: this.state.cart.filter(cartProduct => {
+        return cartProduct.id !== product.id
+      })
     });
   }
 
@@ -80,20 +103,23 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state, "crs")
+
     return (
       <div className="App">
         <Router>
           <Navbar
             filterProducts={this.filterProducts}
             setCurrency={this.setCurrency}
+            updateProductQuantity={this.updateProductQuantity} 
             {...this.state}
           />
           <Switch>
             <Route exact path="/">
-              <Products data={this.state.filtered} {...this.state} />
+              <Products {...this.state} />
             </Route>
             <Route path="/cart">
-              <Cart {...this.state} />
+              <Cart {...this.state} updateProductQuantity={this.updateProductQuantity} />
             </Route>
             <Route
               path="/:id"
@@ -101,6 +127,7 @@ class App extends Component {
                 return (
                   <ProductDetail
                     addToCart={this.addToCart}
+                    removeFromCart={this.removeFromCart}
                     {...match}
                     {...this.state}
                   />

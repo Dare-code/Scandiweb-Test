@@ -6,6 +6,7 @@ import { getCurrencies } from "../queries/currencies";
 import bagShopping from "../assets/images/bagshopping.png";
 import logo from "../assets/images/logo.svg";
 
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ class Navbar extends Component {
       activeNavbarCategory: "all",
     };
     this.addActiveClass = this.addActiveClass.bind(this);
-    this.dropDownMenu = this.dropDown.bind(this);
+    this.toggleDropdown = this.toggleDropdownHandler.bind(this);
   }
 
   addActiveClass() {
@@ -25,18 +26,19 @@ class Navbar extends Component {
     });
   }
 
-  dropDown() {
+  toggleDropdownHandler() {
     this.setState({
       showCartDropdown: !this.state.showCartDropdown,
     });
   }
 
   componentDidMount = async () => {
-    const data = await client.query({
+    const currencies = await client.query({
       query: getCurrencies,
     });
+    this.props.setCurrency(currencies.data.currencies[0].symbol);
     this.setState({
-      currencies: data.data.currencies,
+      currencies: currencies.data.currencies,
     });
   };
 
@@ -76,7 +78,9 @@ class Navbar extends Component {
           <img src={logo} alt="img" />
         </div>
         <div className="actions">
-          <select defaultValue={this.props.value} onChange={setCurrency}>
+          <select defaultValue={this.props.value} onChange={(e) => {
+            setCurrency(e.target.value)
+          }}>
             {this.state.currencies.map((currency) => {
               return (
                 <option value={currency.symbol} key={currency.label}>
@@ -88,19 +92,19 @@ class Navbar extends Component {
           <div>
             <div
               className="shoppingItem"
-              onClick={() => this.dropDown()}
+              onClick={() => this.props.cart.length && this.toggleDropdown()}
             >
-              {this.props.cart.length > 0 ? (
-                <span className="count">{this.props.cart.length}</span>
-              ) : null}
               <div className="bag">
                 <img src={bagShopping} alt="shop" />
               </div>
+              {this.props.cart.length ? (
+                <span className="cartItemsLabel">{this.props.cart.length}</span>
+              ) : null}
             </div>
             {this.state.showCartDropdown ? (
               <DropdownCart
                 {...this.props}
-                dropDownMenu={this.dropDownMenu}
+                toggleDropdown={this.toggleDropdown}
               />
             ) : null}
           </div>

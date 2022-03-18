@@ -1,35 +1,40 @@
 import React from "react";
 import { client } from "../index";
 import { getProduct } from "../queries/product";
-import Atributes from "./atributes";
+import Attributes from "./attributes";
+import { GetPriceBySymbol, IsProductInCart } from "../utils/helper";
+
 class ProductDetail extends React.Component {
     constructor(props) {
         super(props);
+        this.isProductInCart = false;
         this.state = {
-            activeSizeBox: [],
             activePhoto: [],
-            atribute: [],
         };
+        this.updateProduct = this.updateProductHandler.bind(this);
+    }
+
+    updateProductHandler = (product) => {
+        this.setState({
+            ...this.setState,
+            data: product
+        });
     }
 
     componentDidMount = async () => {
-        const data = await client.query({
+        const product = await client.query({
             query: getProduct,
             variables: {
                 id: this.props.match.params.id,
             },
         });
-        this.setState(data);
-        let attributes = !this.state.data.product.attributes.length
-            ? null
-            : this.state.data.product.attributes[0].items[0].id;
+
+        this.setState(product);
         this.setState({
             ...this.state,
-            activePhoto: this.state.data.product.gallery[0],
-            activeSizeBox: attributes,
+            activePhoto: this.state.data.product.gallery[0]
         });
     };
-
 
     render() {
         if (!this.state.data) {
@@ -37,16 +42,18 @@ class ProductDetail extends React.Component {
         }
         const { gallery, name, description, brand, prices, attributes } =
             this.state.data.product;
-
+        this.isProductInCart = IsProductInCart(this.props.cart, this.state.data.product)
+        const price = GetPriceBySymbol(prices, this.props.currency);
         return (
             <div className="productDetailsPage">
                 <div className="imageDetail">
                     {gallery.map((image) => (
-                        <img
+                        <div
                             key={image}
-                            className="productDetailPicture"
-                            src={image}
-                            alt="img"
+                            className="thumbnail"
+                            style={{
+                                backgroundImage:`url(${image})`
+                            }}
                             onClick={() =>
                                 this.setState({
                                     ...this.state,
@@ -60,7 +67,7 @@ class ProductDetail extends React.Component {
                     <div className="singlePicture">
                         <img
                             src={
-                                !this.state.activePhoto ? this.state.activePhoto : gallery[0]
+                                this.state.activePhoto ? this.state.activePhoto : gallery[0]
                             }
                             alt="detailsPicture"
                         />
@@ -69,26 +76,35 @@ class ProductDetail extends React.Component {
                         <h2 className="cartName">{name}</h2>
                         <h2 className="cartBrand">{brand}</h2>
                         <div>
-                            <p className="price">
-                                {!attributes.length ? null : attributes[0].name}
-                            </p>
-                            <Atributes  {...this.state} />
+                            <Attributes {...this.state} updateProduct={this.updateProduct}/>
                         </div>
                         <div>
                             <p className="price">Price :</p>
                             <p className="amount">
-                                {this.props.currency.value}
-                                {prices[0].amount}
+                                {price.currency.symbol}
+                                {price.amount}
                             </p>
                         </div>
-                        <button
-                            className="button"
-                            onClick={() => {
-                                this.props.addToCart(this.state.data.product);
-                            }}
-                        >
-                            Add to Cart
-                        </button>
+                        {this.isProductInCart ? (
+                            <button
+                                className="button removeFromCard"
+                                onClick={() => {
+                                    this.props.removeFromCart(this.state.data.product);
+                                }}
+                            >
+                                Remove from Cart
+                            </button>
+                        ) : (
+                            <button
+                                className="button"
+                                onClick={() => {
+                                    this.props.addToCart(this.state.data.product);
+                                }}
+                            >
+                                Add to Cart
+                            </button>
+                        )}
+
                         <p>
                             <div
                                 className="cartDescription"

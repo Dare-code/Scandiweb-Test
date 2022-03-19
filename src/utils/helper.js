@@ -1,7 +1,7 @@
 export function GetPriceBySymbol(prices, symbol) {
-    return prices.filter(price => {
-        return price.currency.symbol === symbol
-    })[0]
+    return prices.filter((price) => {
+        return price.currency.symbol === symbol;
+    })[0];
 }
 
 export function IsProductInCart(cart, product) {

@@ -2,8 +2,6 @@ import "./App.css";
 import React, { Component } from "react";
 import Navbar from "./components/navbar";
 import Products from "./components/products";
-import { getCategories } from "./queries/categories";
-import { client } from "./index";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./components/productdetails";
 import Cart from "./components/cart";
@@ -16,12 +14,12 @@ class App extends Component {
       filtered: [],
       cart: [],
       currency: false,
-      categoryName: 'All'
+      categoryName: 'all'
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.removeFromCart = this.removeFromCartHandler.bind(this);
     this.updateProductQuantity = this.updateProductQuantityHandler.bind(this);
-    this.filterProducts = this.filterProductsHandler.bind(this);
+    this.setCategory = this.setCategoryHandler.bind(this);
     this.setCurrency = this.setCurrencyHandler.bind(this);
   }
 
@@ -45,18 +43,18 @@ class App extends Component {
   }
 
   updateProductQuantityHandler(product, qunatity) {
-      const _cart = [...this.state.cart];
-      _cart.map(cartProduct => {
-        if( cartProduct.id === product.id ){
-          cartProduct.quantity = qunatity;
-        }
-        return true;
-      });
+    const _cart = [...this.state.cart];
+    _cart.map(cartProduct => {
+      if (cartProduct.id === product.id) {
+        cartProduct.quantity = qunatity;
+      }
+      return true;
+    });
 
-      this.setState({
-        ...this.state,
-        cart: _cart
-      });
+    this.setState({
+      ...this.state,
+      cart: _cart
+    });
 
   }
 
@@ -69,55 +67,25 @@ class App extends Component {
     });
   }
 
-  componentDidMount = async () => {
-    const allCategory = await client.query({
-      query: getCategories,
-    });
-    let flatListOfCategories = [];
-    allCategory.data.categories.map((category) => {
-      if (category.name === "all") {
-        flatListOfCategories = category.products;
-      }
-      return true;
-    });
-    this.setState({
-      filtered: flatListOfCategories,
-      ...allCategory.data,
-    });
-  };
-
-  filterProductsHandler = (name) => {
-    let filtered = [];
-    this.state.categories.map((category) => {
-      if (category.name === name) {
-        filtered = category.products;
-        return true;
-      }
-      return false;
-    });
+  setCategoryHandler = (name) => {
     this.setState({
       ...this.state,
-      filtered: filtered,
       categoryName: name
     });
   };
 
   render() {
-    console.log(this.state, "crs")
-
     return (
       <div className="App">
         <Router>
           <Navbar
-            filterProducts={this.filterProducts}
+            setCategory={this.setCategory}
             setCurrency={this.setCurrency}
-            updateProductQuantity={this.updateProductQuantity} 
+            updateProductQuantity={this.updateProductQuantity}
             {...this.state}
           />
           <Switch>
-            <Route exact path="/">
-              <Products {...this.state} />
-            </Route>
+            <Route exact path="/" render={match => <Products key={match.location.key} {...this.state} />} />
             <Route path="/cart">
               <Cart {...this.state} updateProductQuantity={this.updateProductQuantity} />
             </Route>

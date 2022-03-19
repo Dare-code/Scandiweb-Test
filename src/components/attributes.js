@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Attributes extends Component {
     render() {
         const { attributes: attributesGroup } = this.props.data.product;
-
         return (
             <div className="attributesWrapper">
                 {attributesGroup.length
@@ -11,12 +10,12 @@ class Attributes extends Component {
                         <div key={attributes.name}>
                             <div>{attributes.name}</div>
                             <div>
-                                {attributes.items.map(option => <div onClick={()=>{
+                                {attributes.items.map(option => <div onClick={() => {
                                     this.setState({
                                         ...this.state,
-                                        [attributes.name]:option.id
+                                        [attributes.name]: option.id
                                     })
-                                }} className={"attributeOption" + (this.state && this.state[attributes.name] === option.id ? " active" : "")} key={option.id} style={attributes.type === "swatch" ? { backgroundColor: option.value, borderColor: option.value !== "#FFFFFF" ? option.value : "#000"  } : null}>
+                                }} className={"attributeOption" + (this.state && this.state[attributes.name] === option.id ? " active" : "")} key={option.id} style={attributes.type === "swatch" ? { backgroundColor: option.value, borderColor: option.value !== "#FFFFFF" ? option.value : "#000" } : null}>
                                     {attributes.type !== "swatch" ? option.value : null}
                                 </div>)}
                             </div>

@@ -17,9 +17,9 @@ class ProductDetail extends React.Component {
     updateProductHandler = (product) => {
         this.setState({
             ...this.setState,
-            data: product
+            data: product,
         });
-    }
+    };
 
     componentDidMount = async () => {
         const product = await client.query({
@@ -28,11 +28,10 @@ class ProductDetail extends React.Component {
                 id: this.props.match.params.id,
             },
         });
-
         this.setState(product);
         this.setState({
             ...this.state,
-            activePhoto: this.state.data.product.gallery[0]
+            activePhoto: this.state.data.product.gallery[0],
         });
     };
 
@@ -40,9 +39,12 @@ class ProductDetail extends React.Component {
         if (!this.state.data) {
             return <>Loading...</>;
         }
-        const { gallery, name, description, brand, prices, attributes } =
+        const { gallery, name, description, brand, prices } =
             this.state.data.product;
-        this.isProductInCart = IsProductInCart(this.props.cart, this.state.data.product)
+        this.isProductInCart = IsProductInCart(
+            this.props.cart,
+            this.state.data.product
+        );
         const price = GetPriceBySymbol(prices, this.props.currency);
         return (
             <div className="productDetailsPage">
@@ -52,7 +54,7 @@ class ProductDetail extends React.Component {
                             key={image}
                             className="thumbnail"
                             style={{
-                                backgroundImage:`url(${image})`
+                                backgroundImage: `url(${image})`,
                             }}
                             onClick={() =>
                                 this.setState({
@@ -66,9 +68,7 @@ class ProductDetail extends React.Component {
                 <div className="productDetail">
                     <div className="singlePicture">
                         <img
-                            src={
-                                this.state.activePhoto ? this.state.activePhoto : gallery[0]
-                            }
+                            src={this.state.activePhoto ? this.state.activePhoto : gallery[0]}
                             alt="detailsPicture"
                         />
                     </div>
@@ -76,7 +76,7 @@ class ProductDetail extends React.Component {
                         <h2 className="cartName">{name}</h2>
                         <h2 className="cartBrand">{brand}</h2>
                         <div>
-                            <Attributes {...this.state} updateProduct={this.updateProduct}/>
+                            <Attributes {...this.state} updateProduct={this.updateProduct} />
                         </div>
                         <div>
                             <p className="price">Price :</p>

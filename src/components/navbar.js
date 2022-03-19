@@ -5,7 +5,7 @@ import { client } from "../index";
 import { getCurrencies } from "../queries/currencies";
 import bagShopping from "../assets/images/bagshopping.png";
 import logo from "../assets/images/logo.svg";
-
+import { getCategories } from "../queries/categories";
 
 class Navbar extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class Navbar extends Component {
     this.state = {
       showCartDropdown: false,
       currencies: [],
+      categories: [],
       activeNavbarCategory: "all",
     };
     this.addActiveClass = this.addActiveClass.bind(this);
@@ -36,9 +37,14 @@ class Navbar extends Component {
     const currencies = await client.query({
       query: getCurrencies,
     });
+    const categories = await client.query({
+      query: getCategories,
+    });
+
     this.props.setCurrency(currencies.data.currencies[0].symbol);
     this.setState({
       currencies: currencies.data.currencies,
+      categories: categories.data.categories,
     });
   };
 
@@ -48,12 +54,12 @@ class Navbar extends Component {
       <div className="header">
         <div className="categories">
           <ul>
-            {this.props.categories.map((category) => {
+            {this.state.categories.map((category) => {
               return (
                 <li
                   key={category.name}
                   onClick={() => {
-                    this.props.filterProducts(category.name);
+                    this.props.setCategory(category.name);
                   }}
                 >
                   <Link
@@ -78,9 +84,12 @@ class Navbar extends Component {
           <img src={logo} alt="img" />
         </div>
         <div className="actions">
-          <select defaultValue={this.props.value} onChange={(e) => {
-            setCurrency(e.target.value)
-          }}>
+          <select
+            defaultValue={this.props.value}
+            onChange={(e) => {
+              setCurrency(e.target.value);
+            }}
+          >
             {this.state.currencies.map((currency) => {
               return (
                 <option value={currency.symbol} key={currency.label}>

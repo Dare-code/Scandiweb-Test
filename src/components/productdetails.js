@@ -39,7 +39,7 @@ class ProductDetail extends React.Component {
         if (!this.state.data) {
             return <>Loading...</>;
         }
-        const { gallery, name, description, brand, prices } =
+        const { gallery, name, description, brand, prices, inStock } =
             this.state.data.product;
         this.isProductInCart = IsProductInCart(
             this.props.cart,
@@ -85,32 +85,35 @@ class ProductDetail extends React.Component {
                                 {price.amount}
                             </p>
                         </div>
-                        {this.isProductInCart ? (
-                            <button
-                                className="button removeFromCard"
-                                onClick={() => {
-                                    this.props.removeFromCart(this.state.data.product);
-                                }}
-                            >
-                                Remove from Cart
-                            </button>
+                        {inStock ? (
+                            <div className="outofstockMsg">Out of stock</div>
                         ) : (
-                            <button
-                                className="button"
-                                onClick={() => {
-                                    this.props.addToCart(this.state.data.product);
-                                }}
-                            >
-                                Add to Cart
-                            </button>
+                            <>
+                                {this.isProductInCart ? (
+                                    <button
+                                        className="button removeFromCard"
+                                        onClick={() => {
+                                            this.props.removeFromCart(this.state.data.product);
+                                        }}
+                                    >
+                                        Remove from Cart
+                                    </button>
+                                ) : (
+                                    <button
+                                        className="button"
+                                        onClick={() => {
+                                            this.props.addToCart(this.state.data.product);
+                                        }}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                )}
+                            </>
                         )}
-
-                        <p>
-                            <div
-                                className="cartDescription"
-                                dangerouslySetInnerHTML={{ __html: description }}
-                            />
-                        </p>
+                        <div
+                            className="cartDescription"
+                            dangerouslySetInnerHTML={{ __html: description }}
+                        />
                     </div>
                 </div>
             </div>

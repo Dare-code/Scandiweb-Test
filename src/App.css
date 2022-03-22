@@ -62,14 +62,10 @@
   width: 204px;
   height: 40px;
 }
-.actions select {
-  border: none;
-  outline: none;
-}
-.actions select {
-  font-size: 20px;
-  width: 36px;
+.actions .currencyMenu {
+  list-style-type: none;
   cursor: pointer;
+  margin-top: 70px;
 }
 .shoppingItem {
   margin-left: 24px;
@@ -86,7 +82,7 @@
   width: 325px;
   min-height: 540px;
   right: 110px;
-  top: 78px;
+  top: 95px;
   z-index: 99999;
   background-color: #fff;
   padding: 16px;
@@ -143,6 +139,11 @@
 .addToCart {
   text-align: left;
   width: 30%;
+}
+.addToCart .outofstockMsg {
+  color: #1d1f22;
+  text-transform: uppercase;
+  font-size: 1.2rem;
 }
 .button {
   width: 292px;
@@ -272,6 +273,8 @@
   list-style-type: none;
   padding-top: 20px;
   padding: 0;
+  overflow-y: scroll;
+  max-height: 320px;
 }
 .showDropdownCart li {
   margin-bottom: 19px;
@@ -563,7 +566,7 @@
 .dropdownBackground {
   position: absolute;
   z-index: 9900;
-  top: 0px;
+  top: 95px;
   right: 0px;
   bottom: 0px;
   left: 0px;
@@ -594,4 +597,76 @@
   position: absolute;
   bottom: -40px;
   right: 20px;
+}
+
+.dropbtn {
+  list-style-type: none;
+  cursor: pointer;
+  position: static;
+  width: 12px;
+  height: 29px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  color: #1d1f22;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 24px;
+}
+
+.dropdownContent {
+  display: none;
+  padding: 0;
+  position: absolute;
+  min-width: 114px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdownContent .innerDropdownContent {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  position: static;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+  text-align: right;
+  color: #1d1f22;
+}
+
+.dropdown .innerDropdownContent:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+  position: absolute;
+  left: 8px;
+  margin-top: 8px;
+}
+.dropdownCurrencyItem {
+  margin-right: 5px;
+}
+.arrowUp {
+  margin-left: 10px;
+  transform: rotate(180deg);
+}
+.arrowDown {
+  margin-left: 10px;
+}
+
+.dropdownTitle {
+  display: flex;
+  align-items: center;
 }

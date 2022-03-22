@@ -4,7 +4,7 @@ import Shopping from "../assets/images/shopping.svg";
 
 class Product extends Component {
   render() {
-    const { gallery, name, inStock, prices } = this.props.product;
+    const { gallery, name, inStock, prices, brand } = this.props.product;
     const price = GetPriceBySymbol(prices, this.props.currency);
     const inCart = IsProductInCart(this.props.cart, this.props.product);
     if (!this.props.currency) {
@@ -26,7 +26,7 @@ class Product extends Component {
           ) : null}
         </div>
         <p className="productDescription">{name}</p>
-
+        <p className="productDescription">{brand}</p>
         <p className="productPrice">
           <span>{this.props.currency}</span>
           {price.amount.toFixed(2)}

@@ -5,6 +5,7 @@ import { client } from "../index";
 import { getCurrencies } from "../queries/currencies";
 import bagShopping from "../assets/images/bagshopping.png";
 import logo from "../assets/images/logo.svg";
+import arrowDown from '../assets/images/arrowDown.svg'
 import { getCategories } from "../queries/categories";
 
 class Navbar extends Component {
@@ -12,12 +13,14 @@ class Navbar extends Component {
     super(props);
     this.state = {
       showCartDropdown: false,
+      showCurrencyDropdown: false,
       currencies: [],
       categories: [],
       activeNavbarCategory: "all",
     };
     this.addActiveClass = this.addActiveClass.bind(this);
     this.toggleDropdown = this.toggleDropdownHandler.bind(this);
+    this.toggleCurrency = this.toggleCurrencyHandler.bind(this);
   }
 
   addActiveClass() {
@@ -30,6 +33,12 @@ class Navbar extends Component {
   toggleDropdownHandler() {
     this.setState({
       showCartDropdown: !this.state.showCartDropdown,
+    });
+  }
+
+  toggleCurrencyHandler() {
+    this.setState({
+      showCurrencyDropdown: !this.state.showCurrencyDropdown,
     });
   }
 
@@ -84,20 +93,40 @@ class Navbar extends Component {
           <img src={logo} alt="img" />
         </div>
         <div className="actions">
-          <select
-            defaultValue={this.props.value}
-            onChange={(e) => {
-              setCurrency(e.target.value);
-            }}
-          >
-            {this.state.currencies.map((currency) => {
-              return (
-                <option value={currency.symbol} key={currency.label}>
-                  {currency.symbol}
-                </option>
-              );
-            })}
-          </select>
+          <ul className="dropdown">
+            <li className="dropbtn">
+              <div className="dropdownTitle" onClick={() => this.toggleCurrency()}>
+                {this.props.currency}{" "}
+                <img
+                  src={arrowDown}
+                  alt='img'
+                  className={this.state.showCurrencyDropdown ? 'arrowUp' : 'arrowDown'}
+                />
+              </div>
+              <ul
+                className={`dropdownContent ${this.state.showCurrencyDropdown ? "show" : null
+                  }`}
+              >
+                {this.state.currencies.map((currency) => {
+                  return (
+                    <li
+                      className="innerDropdownContent"
+                      onClick={() => {
+                        setCurrency(currency.symbol);
+                      }}
+                      value={currency.symbol}
+                      key={currency.label}
+                    >
+                      <span className="dropdownCurrencyItem">
+                        {currency.symbol}
+                      </span>
+                      <span> {currency.label}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          </ul>
           <div>
             <div
               className="shoppingItem"

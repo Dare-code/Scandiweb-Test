@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { GetPriceBySymbol, IsProductInCart } from "../utils/helper";
+import { GetPriceBySymbol } from "../utils/helper";
 import Shopping from "../assets/images/shopping.svg";
+import { Link } from "react-router-dom";
 
 class Product extends Component {
   render() {
     const { gallery, name, inStock, prices, brand } = this.props.product;
     const price = GetPriceBySymbol(prices, this.props.currency);
-    const inCart = IsProductInCart(this.props.cart, this.props.product);
     if (!this.props.currency) {
-      return <></>;
+      return <>loading...</>;
     }
     return (
       <div className={"productWrapper" + (inStock ? " outofstock" : "")}>
@@ -18,12 +18,18 @@ class Product extends Component {
             backgroundImage: `url(${gallery[0]})`,
           }}
         >
+          <Link className="productLink" to={`/${this.props.product.id}`}></Link>
           {inStock ? (
             <span className="outofstockMessage">Out of stock</span>
           ) : null}
-          {inCart ? (
-            <img src={Shopping} alt="in cart" className="productInCart" />
-          ) : null}
+          <img
+            src={Shopping}
+            onClick={() => {
+              this.props.addToCart(this.props.product);
+            }}
+            alt="in cart"
+            className="productInCart inlineAddToCart"
+          />
         </div>
         <p className="productDescription">{name}</p>
         <p className="productDescription">{brand}</p>

@@ -5,7 +5,7 @@ import { client } from "../index";
 import { getCurrencies } from "../queries/currencies";
 import bagShopping from "../assets/images/bagshopping.png";
 import logo from "../assets/images/logo.svg";
-import arrowDown from '../assets/images/arrowDown.svg'
+import arrowDown from "../assets/images/arrowdown.svg";
 import { getCategories } from "../queries/categories";
 
 class Navbar extends Component {
@@ -60,94 +60,99 @@ class Navbar extends Component {
   render() {
     const { setCurrency } = this.props;
     return (
-      <div className="header">
-        <div className="categories">
-          <ul>
-            {this.state.categories.map((category) => {
-              return (
-                <li
-                  key={category.name}
-                  onClick={() => {
-                    this.props.setCategory(category.name);
-                  }}
-                >
-                  <Link
-                    className={
-                      this.state.activeNavbarCategory === category.name
-                        ? "activeNavbarCategories"
-                        : "defaultNavbarCategories"
-                    }
-                    onClick={() =>
-                      this.setState({ activeNavbarCategory: category.name })
-                    }
-                    to="/"
+        <div className="header">
+          <div className="categories">
+            <ul>
+              {this.state.categories.map((category) => {
+                return (
+                  <li
+                    key={category.name}
+                    onClick={() => {
+                      this.props.setCategory(category.name);
+                    }}
                   >
-                    {category.name}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="logo-temp">
-          <img src={logo} alt="img" />
-        </div>
-        <div className="actions">
-          <ul className="dropdown">
-            <li className="dropbtn">
-              <div className="dropdownTitle" onClick={() => this.toggleCurrency()}>
-                {this.props.currency}{" "}
-                <img
-                  src={arrowDown}
-                  alt='img'
-                  className={this.state.showCurrencyDropdown ? 'arrowUp' : 'arrowDown'}
-                />
-              </div>
-              <ul
-                className={`dropdownContent ${this.state.showCurrencyDropdown ? "show" : null
-                  }`}
-              >
-                {this.state.currencies.map((currency) => {
-                  return (
-                    <li
-                      className="innerDropdownContent"
-                      onClick={() => {
-                        setCurrency(currency.symbol);
-                      }}
-                      value={currency.symbol}
-                      key={currency.label}
+                    <Link
+                      className={
+                        this.state.activeNavbarCategory === category.name
+                          ? "activeNavbarCategories"
+                          : "defaultNavbarCategories"
+                      }
+                      onClick={() =>
+                        this.setState({ activeNavbarCategory: category.name })
+                      }
+                      to="/"
                     >
-                      <span className="dropdownCurrencyItem">
-                        {currency.symbol}
-                      </span>
-                      <span> {currency.label}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-          </ul>
-          <div>
-            <div
-              className="shoppingItem"
-              onClick={() => this.props.cart.length && this.toggleDropdown()}
-            >
-              <div className="bag">
-                <img src={bagShopping} alt="shop" />
+                      {category.name}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="logo-temp">
+            <img src={logo} alt="img" />
+          </div>
+          <div className="actions">
+            <ul className="dropdown">
+              <li className="dropbtn">
+                <div
+                  className="dropdownTitle"
+                  onClick={() => this.toggleCurrency()}
+                >
+                  {this.props.currency}{" "}
+                  <img
+                    src={arrowDown}
+                    alt="img"
+                    className={
+                      this.state.showCurrencyDropdown ? "arrowUp" : "arrowDown"
+                    }
+                  />
+                </div>
+                <ul
+                  className={`dropdownContent ${this.state.showCurrencyDropdown ? "show" : null
+                    }`}
+                >
+                  {this.state.currencies.map((currency) => {
+                    return (
+                      <li
+                        className="innerDropdownContent"
+                        onClick={() => {
+                          setCurrency(currency.symbol);
+                        }}
+                        value={currency.symbol}
+                        key={currency.label}
+                      >
+                        <span className="dropdownCurrencyItem">
+                          {currency.symbol}
+                        </span>
+                        <span>{currency.label}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
+            </ul>
+            <div>
+              <div
+                className="shoppingItem"
+                onClick={() => this.props.cart.length && this.toggleDropdown()}
+              >
+                <div className="bag">
+                  <img src={bagShopping} alt="shop" />
+                </div>
+                {this.props.cart.length ? (
+                  <span className="cartItemsLabel">{this.props.cart.length}</span>
+                ) : null}
               </div>
-              {this.props.cart.length ? (
-                <span className="cartItemsLabel">{this.props.cart.length}</span>
+              {this.state.showCartDropdown ? (
+                <DropdownCart
+                  {...this.props}
+                  toggleDropdown={this.toggleDropdown}
+                />
               ) : null}
             </div>
-            {this.state.showCartDropdown ? (
-              <DropdownCart
-                {...this.props}
-                toggleDropdown={this.toggleDropdown}
-              />
-            ) : null}
           </div>
         </div>
-      </div>
     );
   }
 }

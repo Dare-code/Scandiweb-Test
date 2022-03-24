@@ -5,6 +5,7 @@ import Products from "./components/products";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "./components/productdetails";
 import Cart from "./components/cart";
+import { ShouldUpdateQuantity } from "./utils/helper";
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends Component {
       filtered: [],
       cart: [],
       currency: false,
-      categoryName: 'all'
+      categoryName: "all",
     };
     this.addToCart = this.addToCartHandler.bind(this);
     this.removeFromCart = this.removeFromCartHandler.bind(this);
@@ -27,9 +28,21 @@ class App extends Component {
     this.setState({
       currency: currency,
     });
-  };
+  }
 
   addToCartHandler(product) {
+    if (product.inStock) {
+      console.warn("the product is out of stock. please choose another one");
+      return;
+    }
+    const shouldUpdateIndex = ShouldUpdateQuantity(this.state.cart, product);
+    if (shouldUpdateIndex >= 0) {
+      this.updateProductQuantity(
+        shouldUpdateIndex,
+        this.state.cart[shouldUpdateIndex].quantity + 1
+      );
+      return;
+    }
     this.setState({
       ...this.state,
       cart: [
@@ -42,35 +55,34 @@ class App extends Component {
     });
   }
 
-  updateProductQuantityHandler(product, qunatity) {
+  updateProductQuantityHandler(index, quantity) {
     const _cart = [...this.state.cart];
-    _cart.map(cartProduct => {
-      if (cartProduct.id === product.id) {
-        cartProduct.quantity = qunatity;
+    _cart.map((product, i) => {
+      if (i === index) {
+        product.quantity = quantity;
       }
       return true;
     });
 
     this.setState({
       ...this.state,
-      cart: _cart
+      cart: _cart,
     });
-
   }
 
   removeFromCartHandler(product) {
     this.setState({
       ...this.state,
-      cart: this.state.cart.filter(cartProduct => {
-        return cartProduct.id !== product.id
-      })
+      cart: this.state.cart.filter((cartProduct) => {
+        return cartProduct.id !== product.id;
+      }),
     });
   }
 
   setCategoryHandler = (name) => {
     this.setState({
       ...this.state,
-      categoryName: name
+      categoryName: name,
     });
   };
 
@@ -81,13 +93,28 @@ class App extends Component {
           <Navbar
             setCategory={this.setCategory}
             setCurrency={this.setCurrency}
+            removeFromCart={this.removeFromCart}
             updateProductQuantity={this.updateProductQuantity}
             {...this.state}
           />
           <Switch>
-            <Route exact path="/" render={match => <Products key={match.location.key} {...this.state} />} />
+            <Route
+              exact
+              path="/"
+              render={(match) => (
+                <Products
+                  key={match.location.key}
+                  {...this.state}
+                  addToCart={this.addToCart}
+                />
+              )}
+            />
             <Route path="/cart">
-              <Cart {...this.state} updateProductQuantity={this.updateProductQuantity} />
+              <Cart
+                removeFromCart={this.removeFromCart}
+                {...this.state}
+                updateProductQuantity={this.updateProductQuantity}
+              />
             </Route>
             <Route
               path="/:id"

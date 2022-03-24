@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Product from "./product";
-import { Link } from "react-router-dom";
 import { client } from "../index";
 import { getCategory } from "../queries/category";
 
@@ -31,9 +30,7 @@ class Products extends Component {
                 <div className="productList">
                     {this.state.products.map((product) => {
                         return (
-                            <Link key={product.id} className="product" to={`/${product.id}`}>
-                                <Product product={product} {...this.props} />
-                            </Link>
+                            <Product key={product.id} product={product} {...this.props} />
                         );
                     })}
                 </div>

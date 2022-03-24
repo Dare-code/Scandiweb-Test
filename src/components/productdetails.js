@@ -17,7 +17,9 @@ class ProductDetail extends React.Component {
     updateProductHandler = (product) => {
         this.setState({
             ...this.setState,
-            data: product,
+            data: {
+                product: product,
+            },
         });
     };
 
@@ -81,33 +83,22 @@ class ProductDetail extends React.Component {
                         <div>
                             <p className="price">Price :</p>
                             <p className="amount">
-                                {price.currency.symbol}
-                                {price.amount}
+                                {price && price.currency.symbol}
+                                {price && price.amount}
                             </p>
                         </div>
                         {inStock ? (
                             <div className="outofstockMsg">Out of stock</div>
                         ) : (
                             <>
-                                {this.isProductInCart ? (
-                                    <button
-                                        className="button removeFromCard"
-                                        onClick={() => {
-                                            this.props.removeFromCart(this.state.data.product);
-                                        }}
-                                    >
-                                        Remove from Cart
-                                    </button>
-                                ) : (
-                                    <button
-                                        className="button"
-                                        onClick={() => {
-                                            this.props.addToCart(this.state.data.product);
-                                        }}
-                                    >
-                                        Add to Cart
-                                    </button>
-                                )}
+                                <button
+                                    className="button"
+                                    onClick={() => {
+                                        this.props.addToCart(this.state.data.product);
+                                    }}
+                                >
+                                    Add to Cart
+                                </button>
                             </>
                         )}
                         <div

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { GetPriceBySymbol } from "../utils/helper";
+import {
+    GetPriceBySymbol,
+    GetProductsTotalQuantityFromCart,
+} from "../utils/helper";
+import deleteBtn from "../assets/images/deletebutton.svg";
 
 class DropdownCart extends Component {
     constructor(props) {
@@ -13,8 +17,13 @@ class DropdownCart extends Component {
         };
     }
     render() {
-        const { cart } = this.props;
+        const { cart, removeFromCart, toggleDropdown } = this.props;
         let total = 0;
+        if (!cart.length) {
+            toggleDropdown();
+        }
+
+        const cartItems = GetProductsTotalQuantityFromCart(cart);
         return (
             <>
                 <div
@@ -23,17 +32,24 @@ class DropdownCart extends Component {
                 />
                 <div className="headerTemp">
                     <span className="headerTempTitle">
-                        My bag : <span>{cart.length} item</span>
+                        My bag :{" "}
+                        <span>
+                            {cartItems} item{cartItems === 1 ? "" : "s"}
+                        </span>
                     </span>
                     <ul className="showDropdownCart">
-                        {cart.map((product) => {
+                        {cart.map((product, i) => {
                             const price = GetPriceBySymbol(
                                 product.prices,
                                 this.props.currency
                             );
                             total += price.amount * product.quantity;
                             return (
-                                <li key={product.name}>
+                                <li
+                                    key={`${product.id}-cart-item-wrapper-${JSON.stringify(
+                                        product.selectedAttributes
+                                    )}`}
+                                >
                                     <div className="cartDetails">
                                         <h2 className="cartDropdownName">{product.name}</h2>
                                         <h2 className="cartDropdownName">{product.brand}</h2>
@@ -42,11 +58,19 @@ class DropdownCart extends Component {
                                             {price.amount}
                                         </p>
                                         <div className="sizeDropdownBox">
-                                            {this.state.values.map((val) => (
-                                                <div key={val.id} className="dropdownInactive">
-                                                    <span className="size">{val.text}</span>
-                                                </div>
-                                            ))}
+                                            {product.selectedAttributes &&
+                                                Object.keys(product.selectedAttributes).map(
+                                                    (option) => (
+                                                        <div
+                                                            key={`${product.id}-attrs-${option}`}
+                                                            className="dropdownInactive"
+                                                        >
+                                                            <span className="size">
+                                                                {product.selectedAttributes[option]}
+                                                            </span>
+                                                        </div>
+                                                    )
+                                                )}
                                         </div>
                                     </div>
                                     <div className="cartQuantity">
@@ -55,7 +79,7 @@ class DropdownCart extends Component {
                                                 className="cartDropdownCounter"
                                                 onClick={() => {
                                                     this.props.updateProductQuantity(
-                                                        product,
+                                                        i,
                                                         product.quantity + 1
                                                     );
                                                 }}
@@ -70,7 +94,7 @@ class DropdownCart extends Component {
                                                 onClick={() => {
                                                     if (product.quantity > 1) {
                                                         this.props.updateProductQuantity(
-                                                            product,
+                                                            i,
                                                             product.quantity - 1
                                                         );
                                                     }
@@ -80,7 +104,21 @@ class DropdownCart extends Component {
                                             </div>
                                         </div>
                                         <div className="cartImage">
-                                            <img src={product.gallery[0]} alt="img" />
+                                            <div className="cartImageInner">
+                                                <img
+                                                    className="deleteButton showDeleteBtn"
+                                                    src={deleteBtn}
+                                                    alt="deleteImg"
+                                                    onClick={() => {
+                                                        removeFromCart(product);
+                                                    }}
+                                                />
+                                            </div>
+                                            <img
+                                                className="mainImage"
+                                                src={product.gallery[0]}
+                                                alt="img"
+                                            />
                                         </div>
                                     </div>
                                 </li>

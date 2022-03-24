@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { GetPriceBySymbol } from "../utils/helper";
+import deleteBtn from "../assets/images/deletebutton.svg";
+import Thumbnail from "./thumbnail";
 
 class Cart extends Component {
     constructor(props) {
@@ -12,14 +14,17 @@ class Cart extends Component {
         };
     }
     render() {
+        if (!this.props.cart.length) {
+            return <h1 className="titleemptycart">Your cart is empty</h1>
+        }
         return (
             <div className="header-temp">
                 <h2 className="cartTitle">Cart</h2>
                 <ul className="showCart">
-                    {this.props.cart.map((product) => {
+                    {this.props.cart.map((product, i) => {
                         const price = GetPriceBySymbol(product.prices, this.props.currency);
                         return (
-                            <li key={product.quantity}>
+                            <li key={product.id} className='cartinner'>
                                 <div className="cartDetails">
                                     <h2 className="cartName">{product.name}</h2>
                                     <p className="cartBrand">{product.brand}</p>
@@ -39,10 +44,7 @@ class Cart extends Component {
                                     <div
                                         className="cartCounter"
                                         onClick={() => {
-                                            this.props.updateProductQuantity(
-                                                product,
-                                                product.quantity + 1
-                                            );
+                                            this.props.updateProductQuantity(i, product.quantity + 1);
                                         }}
                                     >
                                         <span>+</span>
@@ -55,7 +57,7 @@ class Cart extends Component {
                                         onClick={() => {
                                             if (product.quantity > 1) {
                                                 this.props.updateProductQuantity(
-                                                    product,
+                                                    i,
                                                     product.quantity - 1
                                                 );
                                             }
@@ -66,11 +68,17 @@ class Cart extends Component {
                                 </div>
                                 <div className="cartQuantity">
                                     <div className="cartImage">
-                                        <img
-                                            className="cartImageInner"
-                                            src={product.gallery[0]}
-                                            alt="img"
-                                        />
+                                        <div className="cartImageDelete">
+                                            <img
+                                                className="cartImageDeleteButton showDeleteButton"
+                                                src={deleteBtn}
+                                                alt='deleteBtn'
+                                                onClick={() => {
+                                                    this.props.removeFromCart(product);
+                                                }}
+                                            />
+                                        </div>
+                                        <Thumbnail {...this.props} />
                                     </div>
                                 </div>
                             </li>

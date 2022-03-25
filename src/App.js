@@ -70,11 +70,11 @@ class App extends Component {
     });
   }
 
-  removeFromCartHandler(product) {
+  removeFromCartHandler(index) {
     this.setState({
       ...this.state,
-      cart: this.state.cart.filter((cartProduct) => {
-        return cartProduct.id !== product.id;
+      cart: this.state.cart.filter((product, i) => {
+        return i !== index;
       }),
     });
   }

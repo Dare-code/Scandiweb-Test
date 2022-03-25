@@ -7,12 +7,13 @@ class Attributes extends Component {
             this.updateAttributesForProductHander.bind(this);
     }
 
-    updateAttributesForProductHander(key, value) {
+    updateAttributesForProductHander(key, value, type) {
         this.props.updateProduct({
             ...this.props.data.product,
             selectedAttributes: {
                 ...this.props.data.product.selectedAttributes,
                 [key]: value,
+                type: type
             },
         });
     }
@@ -32,7 +33,8 @@ class Attributes extends Component {
                                         onClick={() => {
                                             this.updateAttributesForProduct(
                                                 attributes.name,
-                                                option.id
+                                                option.id,
+                                                attributes.type
                                             );
                                         }}
                                         className={

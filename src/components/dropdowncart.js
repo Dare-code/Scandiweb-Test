@@ -5,24 +5,12 @@ import {
     GetProductsTotalQuantityFromCart,
 } from "../utils/helper";
 import deleteBtn from "../assets/images/deletebutton.svg";
+import SelectedAtributes from "./selectedatributes";
 
 class DropdownCart extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            values: [
-                { id: 1, text: "XS" },
-                { id: 2, text: "S" },
-            ],
-        };
-    }
     render() {
-        const { cart, removeFromCart, toggleDropdown } = this.props;
+        const { cart, removeFromCart } = this.props;
         let total = 0;
-        if (!cart.length) {
-            toggleDropdown();
-        }
-
         const cartItems = GetProductsTotalQuantityFromCart(cart);
         return (
             <>
@@ -58,19 +46,7 @@ class DropdownCart extends Component {
                                             {price.amount}
                                         </p>
                                         <div className="sizeDropdownBox">
-                                            {product.selectedAttributes &&
-                                                Object.keys(product.selectedAttributes).map(
-                                                    (option) => (
-                                                        <div
-                                                            key={`${product.id}-attrs-${option}`}
-                                                            className="dropdownInactive"
-                                                        >
-                                                            <span className="size">
-                                                                {product.selectedAttributes[option]}
-                                                            </span>
-                                                        </div>
-                                                    )
-                                                )}
+                                            <SelectedAtributes attributes={product.selectedAttributes} />
                                         </div>
                                     </div>
                                     <div className="cartQuantity">
@@ -110,7 +86,10 @@ class DropdownCart extends Component {
                                                     src={deleteBtn}
                                                     alt="deleteImg"
                                                     onClick={() => {
-                                                        removeFromCart(product);
+                                                        if (cart.length === 1) {
+                                                            this.props.toggleDropdown()
+                                                        }
+                                                        removeFromCart(i);
                                                     }}
                                                 />
                                             </div>

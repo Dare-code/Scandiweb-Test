@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GetPriceBySymbol } from "../utils/helper";
 import deleteBtn from "../assets/images/deletebutton.svg";
 import Thumbnail from "./thumbnail";
+import SelectedAtributes from "./selectedatributes";
 
 class Cart extends Component {
     constructor(props) {
@@ -32,13 +33,7 @@ class Cart extends Component {
                                         {price.currency.symbol}
                                         {price.amount}
                                     </p>
-                                    <div className="sizeBox">
-                                        {this.state.values.map((val) => (
-                                            <div key={val.id} className="sizeBoxInactive">
-                                                <span className="size">{val.text}</span>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    <SelectedAtributes  attributes={product.selectedAttributes} />
                                 </div>
                                 <div className="cartQuantityInner">
                                     <div
@@ -74,11 +69,11 @@ class Cart extends Component {
                                                 src={deleteBtn}
                                                 alt='deleteBtn'
                                                 onClick={() => {
-                                                    this.props.removeFromCart(product);
+                                                    this.props.removeFromCart(i);
                                                 }}
                                             />
                                         </div>
-                                        <Thumbnail {...this.props} />
+                                        <Thumbnail product={product} />
                                     </div>
                                 </div>
                             </li>

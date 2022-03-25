@@ -83,7 +83,7 @@
   min-height: 540px;
   right: 110px;
   top: 95px;
-  z-index: 99999;
+  z-index: 999999999;
   background-color: #fff;
   padding: 16px;
 }
@@ -754,4 +754,8 @@
 .titleemptycart {
  text-align: center;
  margin-top: 100px;
+}
+.selectedattr {
+  display: flex;
+  margin-right: 20px;
 }

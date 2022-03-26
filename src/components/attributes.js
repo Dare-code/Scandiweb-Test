@@ -30,18 +30,16 @@ class Attributes extends Component {
                                 {attributes.items.map((option) => (
                                     <div
                                         onClick={() => {
-                                            this.updateAttributesForProduct(
-                                                attributes.name,
-                                                {
-                                                    option: option.id,
-                                                    type: attributes.type
-                                                }
-                                            );
+                                            this.updateAttributesForProduct(attributes.name, {
+                                                option: option.id,
+                                                type: attributes.type,
+                                            });
                                         }}
                                         className={
                                             "attributeOption" +
                                             (selectedAttributes &&
-                                                selectedAttributes[attributes.name] === option.id
+                                                selectedAttributes[attributes.name] &&
+                                                selectedAttributes[attributes.name].option === option.id
                                                 ? " active"
                                                 : "")
                                         }

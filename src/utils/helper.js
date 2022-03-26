@@ -24,9 +24,21 @@ export function ShouldUpdateQuantity(cart, product) {
     let shouldUpdate = -1;
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === product.id) {
-            if (JSON.stringify(cart[i].selectedAttributes) === (JSON.stringify(product.selectedAttributes))) {
-                shouldUpdate = i;
-            } 
+            if (
+                cart[i].selectedAttributes.length === product.selectedAttributes.length
+            ) {
+                const keys = Object.keys(cart[i].selectedAttributes);
+                for (let j = 0; j < keys.length; j++) {
+                    if (
+                        cart[i].selectedAttributes[keys[j]] &&
+                        product.selectedAttributes[keys[j]] &&
+                        cart[i].selectedAttributes[keys[j]].option ===
+                        product.selectedAttributes[keys[j]].option
+                    ) {
+                        return i;
+                    }
+                }
+            }
         }
     }
     return shouldUpdate;

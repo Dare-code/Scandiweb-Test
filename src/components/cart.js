@@ -16,7 +16,7 @@ class Cart extends Component {
     }
     render() {
         if (!this.props.cart.length) {
-            return <h1 className="titleemptycart">Your cart is empty</h1>
+            return <h1 className="titleemptycart">Your cart is empty</h1>;
         }
         return (
             <div className="header-temp">
@@ -25,7 +25,7 @@ class Cart extends Component {
                     {this.props.cart.map((product, i) => {
                         const price = GetPriceBySymbol(product.prices, this.props.currency);
                         return (
-                            <li key={product.id} className='cartinner'>
+                            <li key={product.id} className="cartinner">
                                 <div className="cartDetails">
                                     <h2 className="cartName">{product.name}</h2>
                                     <p className="cartBrand">{product.brand}</p>
@@ -34,7 +34,9 @@ class Cart extends Component {
                                         {price.amount}
                                     </p>
                                     <div className="cartAttr">
-                                        <SelectedAtributes attributes={product.selectedAttributes} />
+                                        <SelectedAtributes
+                                            attributes={product.selectedAttributes}
+                                        />
                                     </div>
                                 </div>
                                 <div className="cartQuantityInner">
@@ -69,7 +71,7 @@ class Cart extends Component {
                                             <img
                                                 className="cartImageDeleteButton showDeleteButton"
                                                 src={deleteBtn}
-                                                alt='deleteBtn'
+                                                alt="deleteBtn"
                                                 onClick={() => {
                                                     this.props.removeFromCart(i);
                                                 }}

@@ -5,7 +5,7 @@ class Thumbnail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: 0
+            index: 0,
         };
         this.changeImage = this.changeImageHandler.bind(this);
     }

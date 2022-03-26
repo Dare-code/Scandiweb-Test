@@ -56,6 +56,7 @@ class App extends Component {
   }
 
   updateProductQuantityHandler(index, quantity) {
+    console.log(index,quantity)
     const _cart = [...this.state.cart];
     _cart.map((product, i) => {
       if (i === index) {

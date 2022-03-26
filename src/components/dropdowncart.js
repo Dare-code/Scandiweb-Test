@@ -9,6 +9,7 @@ import SelectedAtributes from "./selectedatributes";
 
 class DropdownCart extends Component {
     render() {
+       
         const { cart, removeFromCart } = this.props;
         let total = 0;
         const cartItems = GetProductsTotalQuantityFromCart(cart);
@@ -45,7 +46,7 @@ class DropdownCart extends Component {
                                             {price.currency.symbol}
                                             {price.amount}
                                         </p>
-                                        <div className="sizeDropdownBox">
+                                        <div >
                                             <SelectedAtributes attributes={product.selectedAttributes} />
                                         </div>
                                     </div>

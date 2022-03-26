@@ -33,7 +33,9 @@ class Cart extends Component {
                                         {price.currency.symbol}
                                         {price.amount}
                                     </p>
-                                    <SelectedAtributes  attributes={product.selectedAttributes} />
+                                    <div className="cartAttr">
+                                        <SelectedAtributes attributes={product.selectedAttributes} />
+                                    </div>
                                 </div>
                                 <div className="cartQuantityInner">
                                     <div

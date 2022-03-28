@@ -15,7 +15,7 @@ export function IsProductInCart(cart, product) {
 export function GetProductsTotalQuantityFromCart(cart) {
     let total = 0;
     cart.map(product => {
-        total += product.quantity;
+        return total += product.quantity;
     })
     return total;
 }
@@ -25,6 +25,8 @@ export function ShouldUpdateQuantity(cart, product) {
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].id === product.id) {
             if (
+                cart[i].selectedAttributes &&
+                product.selectedAttributes &&
                 cart[i].selectedAttributes.length === product.selectedAttributes.length
             ) {
                 const keys = Object.keys(cart[i].selectedAttributes);

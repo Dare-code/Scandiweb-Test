@@ -15,6 +15,10 @@ class DropdownCart extends Component {
         return (
             <>
                 <div
+                    className={this.props.toggleDropdown ? "dropdownMainBackround" : null}
+                    onClick={this.props.toggleDropdown}
+                />
+                <div
                     className="dropdownBackground"
                     onClick={this.props.toggleDropdown}
                 />

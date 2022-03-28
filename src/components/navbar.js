@@ -60,6 +60,13 @@ class Navbar extends Component {
   render() {
     const { setCurrency } = this.props;
     return (
+      <>
+        {this.state.showCurrencyDropdown ? (
+          <div
+            className="dropdownBackgroundDefault"
+            onClick={this.toggleCurrency}
+          />
+        ) : null}
         <div className="header">
           <div className="categories">
             <ul>
@@ -118,6 +125,7 @@ class Navbar extends Component {
                         className="innerDropdownContent"
                         onClick={() => {
                           setCurrency(currency.symbol);
+                          this.toggleCurrencyHandler();
                         }}
                         value={currency.symbol}
                         key={currency.label}
@@ -141,7 +149,9 @@ class Navbar extends Component {
                   <img src={bagShopping} alt="shop" />
                 </div>
                 {this.props.cart.length ? (
-                  <span className="cartItemsLabel">{this.props.cart.length}</span>
+                  <span className="cartItemsLabel">
+                    {this.props.cart.length}
+                  </span>
                 ) : null}
               </div>
               {this.state.showCartDropdown ? (
@@ -153,6 +163,7 @@ class Navbar extends Component {
             </div>
           </div>
         </div>
+      </>
     );
   }
 }

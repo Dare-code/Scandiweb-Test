@@ -24,23 +24,23 @@ class Thumbnail extends Component {
     render() {
         return (
             <div>
-                <img
+                {this.props.product.gallery.length < 2 ? <img
                     src={arrowLeft}
                     alt="arrowImg"
                     className="arrowLeft"
                     onClick={() => this.changeImage(this.state.index - 1)}
-                />
+                /> : null}
                 <img
                     className="cartImageInner"
                     src={this.props.product.gallery[this.state.index]}
                     alt="img"
                 />
-                <img
+                {this.props.product.gallery.length < 2 ? <img
                     src={arrowLeft}
                     alt="arrowImg"
                     className="arrowRight"
                     onClick={() => this.changeImage(this.state.index + 1)}
-                />
+                /> : null}
             </div>
         );
     }

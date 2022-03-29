@@ -7,6 +7,7 @@ import bagShopping from "../assets/images/bagshopping.png";
 import logo from "../assets/images/logo.svg";
 import arrowDown from "../assets/images/arrowdown.svg";
 import { getCategories } from "../queries/categories";
+import { GetProductsTotalQuantityFromCart } from "../utils/helper";
 
 class Navbar extends Component {
   constructor(props) {
@@ -58,7 +59,9 @@ class Navbar extends Component {
   };
 
   render() {
-    const { setCurrency } = this.props;
+    const { setCurrency, cart } = this.props;
+    console.log(cart, 'cart')
+    const cartItems = GetProductsTotalQuantityFromCart(cart);
     return (
       <>
         {this.state.showCurrencyDropdown ? (
@@ -150,7 +153,8 @@ class Navbar extends Component {
                 </div>
                 {this.props.cart.length ? (
                   <span className="cartItemsLabel">
-                    {this.props.cart.length}
+                    {/* {this.props.cart.length} */}
+                    {cartItems}
                   </span>
                 ) : null}
               </div>

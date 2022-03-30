@@ -11,7 +11,7 @@ class Product extends Component {
       return <>loading...</>;
     }
     return (
-      <div className={"productWrapper" + (inStock ? " outofstock" : "")}>
+      <div className={"productWrapper" + (!inStock ? " outofstock" : "")}>
         <div
           className="productPicture"
           style={{
@@ -19,7 +19,7 @@ class Product extends Component {
           }}
         >
           <Link className="productLink" to={`/${this.props.product.id}`}></Link>
-          {inStock ? (
+          {!inStock ? (
             <span className="outofstockMessage">Out of stock</span>
           ) : null}
           <img

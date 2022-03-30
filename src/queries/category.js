@@ -11,6 +11,15 @@ query getCategoryProducts($name: String!) {
       gallery
       brand
       inStock
+      attributes {
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
       prices {
         currency {
           label

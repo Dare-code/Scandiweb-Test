@@ -87,10 +87,10 @@ class ProductDetail extends React.Component {
                                 {price && price.amount}
                             </p>
                         </div>
-                        {inStock ? (
+                        {!inStock ? (
                             <div className="outofstockMsg">Out of stock</div>
                         ) : (
-                            <>
+                            <div >
                                 <button
                                     className="button"
                                     onClick={() => {
@@ -99,7 +99,7 @@ class ProductDetail extends React.Component {
                                 >
                                     Add to Cart
                                 </button>
-                            </>
+                            </div>
                         )}
                         <div
                             className="cartDescription"

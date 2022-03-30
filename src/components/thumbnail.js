@@ -24,7 +24,7 @@ class Thumbnail extends Component {
     render() {
         return (
             <div>
-                {this.props.product.gallery.length < 2 ? <img
+                {this.props.product.gallery.length > 2 ? <img
                     src={arrowLeft}
                     alt="arrowImg"
                     className="arrowLeft"
@@ -35,7 +35,7 @@ class Thumbnail extends Component {
                     src={this.props.product.gallery[this.state.index]}
                     alt="img"
                 />
-                {this.props.product.gallery.length < 2 ? <img
+                {this.props.product.gallery.length > 2 ? <img
                     src={arrowLeft}
                     alt="arrowImg"
                     className="arrowRight"

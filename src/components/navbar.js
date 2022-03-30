@@ -60,7 +60,6 @@ class Navbar extends Component {
 
   render() {
     const { setCurrency, cart } = this.props;
-    console.log(cart, 'cart')
     const cartItems = GetProductsTotalQuantityFromCart(cart);
     return (
       <>
@@ -153,7 +152,6 @@ class Navbar extends Component {
                 </div>
                 {this.props.cart.length ? (
                   <span className="cartItemsLabel">
-                    {/* {this.props.cart.length} */}
                     {cartItems}
                   </span>
                 ) : null}

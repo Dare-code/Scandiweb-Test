@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   addToCartHandler(product) {
-    if (product.inStock) {
+    if (product.inStock === false) {
       console.warn("the product is out of stock. please choose another one");
       return;
     }
@@ -57,7 +57,6 @@ class App extends Component {
   }
 
   updateProductQuantityHandler(index, quantity) {
-    console.log(index, quantity)
     const _cart = [...this.state.cart];
     _cart.map((product, i) => {
       if (i === index) {

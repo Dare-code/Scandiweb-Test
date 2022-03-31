@@ -90,7 +90,7 @@ class ProductDetail extends React.Component {
                         {!inStock ? (
                             <div className="outofstockMsg">Out of stock</div>
                         ) : (
-                            <div >
+                            <div>
                                 <button
                                     className="button"
                                     onClick={() => {

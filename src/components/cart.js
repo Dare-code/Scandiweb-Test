@@ -25,7 +25,12 @@ class Cart extends Component {
                     {this.props.cart.map((product, i) => {
                         const price = GetPriceBySymbol(product.prices, this.props.currency);
                         return (
-                            <li key={product.id} className="cartinner">
+                            <li
+                                key={`${product.id}-cart-item-wrapper-${JSON.stringify(
+                                    product.selectedAttributes
+                                )}`}
+
+                                className="cartinner">
                                 <div className="cartDetails">
                                     <h2 className="cartName">{product.name}</h2>
                                     <p className="cartBrand">{product.brand}</p>

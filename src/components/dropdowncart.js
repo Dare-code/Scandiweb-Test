@@ -31,7 +31,6 @@ class DropdownCart extends Component {
                     </span>
                     <ul className="showDropdownCart">
                         {cart.map((product, i) => {
-                            { console.log(product, 'product') }
                             const price = GetPriceBySymbol(
                                 product.prices,
                                 this.props.currency
@@ -51,7 +50,6 @@ class DropdownCart extends Component {
                                             {price.amount}
                                         </p>
                                         <div className="dropdowncartattr">
-                                            {product.attributes[0].items[0].value}
                                             <SelectedAtributes
                                                 attributes={product.selectedAttributes}
                                             />

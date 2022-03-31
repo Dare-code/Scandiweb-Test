@@ -10,6 +10,7 @@ import SelectedAtributes from "./selectedatributes";
 class DropdownCart extends Component {
     render() {
         const { cart, removeFromCart } = this.props;
+        console.log(cart, 'cart')
         let total = 0;
         const cartItems = GetProductsTotalQuantityFromCart(cart);
         return (

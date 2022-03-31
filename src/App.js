@@ -31,6 +31,7 @@ class App extends Component {
   }
 
   addToCartHandler(product) {
+    console.log(product, 'product')
     if (product.inStock === false) {
       console.warn("the product is out of stock. please choose another one");
       return;

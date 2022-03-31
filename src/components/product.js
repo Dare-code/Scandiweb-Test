@@ -11,6 +11,7 @@ class Product extends Component {
   }
 
   updateAttributesForProductHander(key, value) {
+    console.log(key, 'key', value, 'value')
     this.props.addToCart({
       ...this.props.product,
       selectedAttributes: {
@@ -43,7 +44,7 @@ class Product extends Component {
             onClick={() => {
               this.updateAttributesForProduct(attributes.attributes, {
                 option: attributes[0].items[0].value,
-                attributes: attributes[0].items[0].value,
+                type: attributes[0].items[0].value,
               });
             }}
             alt="in cart"

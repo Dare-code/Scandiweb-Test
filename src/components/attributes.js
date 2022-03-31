@@ -31,7 +31,7 @@ class Attributes extends Component {
                                     <div
                                         onClick={() => {
                                             this.updateAttributesForProduct(attributes.name, {
-                                                option: option.id,
+                                                option: option.value,
                                                 type: attributes.type,
                                             });
                                         }}
@@ -39,7 +39,7 @@ class Attributes extends Component {
                                             "attributeOption" +
                                             (selectedAttributes &&
                                                 selectedAttributes[attributes.name] &&
-                                                selectedAttributes[attributes.name].option === option.id
+                                                selectedAttributes[attributes.name].option === option.value
                                                 ? " active"
                                                 : "")
                                         }

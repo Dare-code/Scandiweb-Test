@@ -161,6 +161,10 @@
   text-transform: uppercase;
   cursor: pointer;
 }
+.button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
 .price {
   font-style: normal;
   font-weight: 700;

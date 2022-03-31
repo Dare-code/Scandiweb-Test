@@ -1,28 +1,15 @@
 import React, { Component } from "react";
-import { GetPriceBySymbol } from "../utils/helper";
+import {
+  getDefaultAttributesForProduct,
+  GetPriceBySymbol,
+} from "../utils/helper";
 import Shopping from "../assets/images/shopping.svg";
 import { Link } from "react-router-dom";
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    this.updateAttributesForProduct =
-      this.updateAttributesForProductHander.bind(this);
-  }
-
-  updateAttributesForProductHander(key, value) {
-    console.log(key, 'key', value, 'value')
-    this.props.addToCart({
-      ...this.props.product,
-      selectedAttributes: {
-        ...this.props.product.selectedAttributes,
-        [key]: value,
-      },
-    });
-  }
-
   render() {
-    const { gallery, name, inStock, prices, brand, attributes } = this.props.product;
+    const { gallery, name, inStock, prices, brand } =
+      this.props.product;
     const price = GetPriceBySymbol(prices, this.props.currency);
     if (!this.props.currency) {
       return <>loading...</>;
@@ -42,9 +29,11 @@ class Product extends Component {
           <img
             src={Shopping}
             onClick={() => {
-              this.updateAttributesForProduct(attributes.attributes, {
-                option: attributes[0].items[0].value,
-                type: attributes[0].items[0].value,
+              this.props.addToCart({
+                ...this.props.product,
+                selectedAttributes: getDefaultAttributesForProduct(
+                  this.props.product
+                ),
               });
             }}
             alt="in cart"

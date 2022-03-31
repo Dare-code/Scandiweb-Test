@@ -151,9 +151,7 @@ class Navbar extends Component {
                   <img src={bagShopping} alt="shop" />
                 </div>
                 {this.props.cart.length ? (
-                  <span className="cartItemsLabel">
-                    {cartItems}
-                  </span>
+                  <span className="cartItemsLabel">{cartItems}</span>
                 ) : null}
               </div>
               {this.state.showCartDropdown ? (
